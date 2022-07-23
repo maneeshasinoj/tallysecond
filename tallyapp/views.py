@@ -511,6 +511,10 @@ def displaymore(request,pk):
     context = {'com':com}
     return render(request,'displaymore.html',context)
 
+def accountbook(request,pk):
+    
+
+
 
 
 
