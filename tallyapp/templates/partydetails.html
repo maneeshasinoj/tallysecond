@@ -11,87 +11,154 @@
         }
     </style>
 
-    
-  <div class="m-0" style="width: 800px;margin-left: 100px;">
+
+<script>
+    function showVouchers(){
+      
+        document.getElementById('voucherPop').style.visibility= "visible";
+        document.getElementById('voucherPop').style.display = "block";  
+       
+    }
+    window.addEventListener('click',outsideClick)
+    function outsideClick(event){
+        if(event.target == document.getElementById('voucherPop')){
+            document.getElementById('voucherPop').style.display = "none"
+        }
+    }
+    function showname(){
+            
+            var name = document.getElementById("name");
+            var mailingname = name.value;
+            document.getElementById("mailingname").value= mailingname;
+        }
+    function setVtype(names)
+    {
+        document.getElementById('name').value=names
+        var name = document.getElementById("name");
+            var mailingname = name.value;
+            document.getElementById("mailingname").value= mailingname;
+        
+    }
+    function setstate(names)
+    {
+        document.getElementById('state').value=names
+        
+    }
+
+   /* function showstate(){
+            var status = document.getElementById("state");
+            var a = status.value;
+            console.log(a);
+            if( a == "state" ){
+                console.log(a);
+
+                document.getElementById('list').style.display = "flex";
+            }
+        } */
+</script>
+
+
+  <div class="m justify-content-center" style="width:800px">
      <!---->
        
-    <h6 class="bg-info text-light p-1 m-1 text-left">Credit Note</h6>
+   
     
-    <div  style="text-align: center;margin-top:-35px;font-weight:900">{{cmp.name}}</div>
 
-            <form  style="background-color:rgba(0,0,0,.4);" method="post" action="#">
+            <form  style="background-color:rgba(0,0,0,.4);"  action="{% url 'creditnote' %}">
                 {% csrf_token %}
-                
-                <div class="row container-fluid p-0 m-0" >
-
-                    <div class="col-sm-6 m-0 p-4">
+                <h6  class="bg-info text-light p-1 m-1 text-center">Party Details</h6>
+                <div class="row container-fluid justify-content-center" >
+                    
+                    <div class="col-sm-6 m-2 p-4">
 
                         <div class="row container-fluid  p-2 m-0">
-                            <div class="col-sm-4 m-0 p-0"> <label >Buyer(Biil to)</label></div>
-                            <div class="col-sm-8 m-0 p-0"><input onchange="showname()" required type="text" class="form-control" id="name"  placeholder="" name="name"></div>
+                            <div class="col-sm-4  p-0" > <label >Buyer(Biil to)</label></div>
+                            <div class="col-sm-8 p-0"><input onchange="showname()" required type="text" class="form-control" id="name"  placeholder="" name="name"></div>
                         </div>
+                        
 
                         <div class="row container-fluid  p-2 m-0">
                             <div class="col-sm-4 m-0 p-0"> <label >Mailing Address</label></div>
                             <div class="col-sm-8 m-0 p-0"> 
-                            <input type="text" class="form-control" id="" placeholder="" name="alias"></div>
+                            <input type="text"  class="form-control" id="mailingname" name="mailingname"></div>
                         </div>
+                        
+
                         <div class="row container-fluid  p-2 m-0">
                             <div class="col-sm-4 m-0 p-0"> <label >Address</label></div>
                             <div class="col-sm-8 m-0 p-0"> 
                             <input type="text" class="form-control" id="" placeholder="" name="alias"></div>
                         </div>
+                        <div class="row container-fluid  p-2 m-0">
+                            <div class="col-sm-4 m-0 p-0"> <label >State</label></div>
+                            <div class="col-sm-8 m-0 p-0"> 
+                            <input type="text" class="form-control" id="state" name="state" id="state" onclick="showVouchers()"></div>
+                           
+                        </div>
+                        
+                        <div class="row container-fluid  p-2 m-0">
+                            <div class="col-sm-4 m-0 p-0"> <label >Country</label></div>
+                            <div class="col-sm-8 m-0 p-0"> 
+                            <input type="text" class="form-control" value="India" id="" placeholder="" name="alias" placeholder="india"></div>
+                        </div>
+            
 
                     </div>
                 </div>
               
+                <div class="col-sm-3 m-0 p-0"></div>
 
-           <div class="row container-fluid  p-0 m-0" style=" border: 1px solid rgba(128, 128, 128, 0.6);"> 
-      <!-- <div class="col-sm-4 m-0 p-4" style=" border-right: 1px solid rgba(128, 128, 128, 0.6);">  -->
-                    
+                <div class="enter w-100 py-4"><button class="btn btn-info w-25 px-4">OK</button></div>  
 
-                    <div class="row container-fluid  p-2 m-0">
-                        <div class="col-sm-6 m-0 p-0"> <label for="c">Name of Item</label></div>
-                        
-                    </div>
-                    
-                
-
-            </div>
-        
-           
-                
-                <!-- Listing -->
+            <!-- Listing -->
               
-                <div class="row container" style="margin-block-start: -205px;margin-left: 530px;">
-                    <div class="col-sm-4 m-1 p-1"></div>
-                    <div class="col-sm-4 m-1 p-1" style=" background-color:rgba(0,0,0,0.2); height: 400px; padding-bottom: 10px;">
-                        <!-- <a href="javascript:history.go(-1);" class="close">+</a> -->
-                    <div  class="bg-info text-light">List of Ledger Accounts</div>
-                           <div>
-                               <table>
-                                <br>
+            <div id="table" class="row container" style="margin-block-start: -205px;margin-left: 530px;margin-top: -370px;">
+                <div class="col-sm-4 m-1 p-1"></div>
+                <div class="col-sm-4 m-1 p-1" style=" background-color:rgba(0,0,0,0.2); height: 400px; padding-bottom: 10px;">
+                    <!-- <a href="javascript:history.go(-1);" class="close">+</a> -->
+                <div  class="bg-info text-light">List of Ledger Accounts</div>
+                       <div>
+                           <table>
+                            <br>
+                            
+                            <tr>
+                                <div style="text-align: right;margin-right: 20px;"><a href="">Create</a></div>   
                                 
+                                </tr>
                                 <tr>
-                                    <div style="text-align: right;margin-right: 20px;"><a href="">Create</a></div>   
+                                    <div style="text-align: right;margin-right: 20px;"><a href="{% url 'alter' %}">Back</a></div>   
                                     
-                                    </tr>
-                                    <tr>
-                                        <div style="text-align: right;margin-right: 20px;"><a href="{% url 'alter' %}">Back</a></div>   
-                                        
-                                    </tr>
-                                    <hr style="width:100%;text-align:left;margin-left:0">
-                                    {% for i in ledger %}
-                        
-                                    <tr>
-                                    <div style="margin-left: 25px;"><a href="#">{{i.name}}</a></div>
-                                    </tr>
-                                    {% endfor %}
-                                    
-                                    
-                               </table>
-                           </div>
-                        </div>
-                    
-           </div>    
+                                </tr>
+                                <hr style="width:100%;text-align:left;margin-left:0">
+                                {% for i in ledger %}
+                                    {% if i.under == "Sundry_Creditors" %}
+                                <tr>
+                                <div style="margin-left: 25px;"><a onclick="setVtype('{{ i.name }}');">{{i.name}}</a></div>
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                                
+                                
+                           </table>
+                       </div>
+                    </div>
+
+            <div class="row container">  
+            <div class="modal" id="voucherPop" style="width: 260px;height: 800px; margin-left: 890px;margin-top: 150px;">
+                <div class="modal-content">
+                    <div class="modal-header bg-info ">
+                        <h6 class="modal-title ml-3">List of States</h6>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text-right"><a  style="cursor: pointer;" class="text-dark">Create</a></div>
+                        <hr class="mt-0 border-dark">
+                        <ul class="list-group">
+                            {% for s in states %}
+                            <li class="list-group-item" onclick="setstate('{{ s.name }}');">{{ s.name }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>          
+        </form>
 {% endblock %}

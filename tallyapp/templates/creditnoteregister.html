@@ -8,55 +8,81 @@
         justify-content: center;
         
     }
+    .month
+    {
+        
+        display: grid;
+        margin-left: 10px;
+        font-size:medium
+    }
+    .text{
+        text:center;
+    }
+    a:hover {
+  background-color: rgb(255, 196, 0);
+}
+
+
 </style>
 
-<div class="">
-<h6 class="bg-info text-light text-left">credit Note Register</h6>
-<div  style="text-align: center;margin-top:-35px;font-weight:900">{{cmp.name}}</div>
-</div>
-       
-            
 
 
 
-                    <div class="row container-fluid p-0" style=" border: 1px solid rgba(128, 128, 128, 0.6); margin-top: 35px; margin-left: 0px;">
+<div class="row container-fluid p-0 mx-0 justify-content-center">
+    <div class="col-sm-10 p-0" style="background-color:rgba(0,0,0,0.2);height: 100%;">
+        <div hidden id="cid">{{ com.id }}</div>
+        <div  class="bg-info text-light">&nbsp; &nbsp;  Credit Note Register<span style="margin-left: 40%;">{{cmp.name}}</span></div>
+        <div class="row container-fluid m-0 mt-4 w-100 p-0">
+            <span class="card border-bottom border-top w-75 rounded-0 contra_head">
+                <div class="card-body">
+                    <div class="card-text mt-3"><b>P a r t i c u l a r s</b></div>
+                </div>
+            </span>
+            <span class="card border w-25 text-center rounded-0 contra_head">
+                <div class="card-body p-0">
+                    <div class="card-title border-bottom mb-0">
+                    
+                        <i id="Vname">Credit Note</i><br><b>{{cmp.name}}</b><br>For 
                         
-                        <div class="col-sm-4  p-4" style=" border-right: 1px solid rgba(128, 128, 128, 0.6);margin-left: 500px;">
-                            
-                            <div class="row container-fluid  p-2 m-0">
-                
-                                <div class="col-sm-4 m-0 p-0" > 
-                                    <h5 class="text-left" >Particulars</h5></div>
-
-                                    <div class="col-sm-6 p-0 "style="margin-left:600px;margin-top:1px;text-left" >
-                                        <h4>Creditnote</h4>
-                                        <h5 >Transactions</h5>
-                                
-                            </div>
-                         
-                        </div>
-                        
-                       
-                   
                     </div>
                     
-                         
-                  
-</div>
+                    <div class="card-text border-bottom">
+                        <b>Transactions</b>
+                    </div>
+                    <div class="card-text row container-fluid p-0 ml-1">
+                        <span class="col-sm-6 border-right p-0">Total Vouchers</span>
+                        <span class="col-sm-6 p-0">(Cancelled)</span>
+                    </div>
+                </div>
+            </span>
+        </div>
+<script>
+    document.getElementById("currentDate").innerHTML=new Date().toDateString();
+    function setDate(){
+            document.getElementById("currentDate").innerHTML= document.getElementById('enterDate').value;
+        }
+        var table = document.getElementById("table");
+            var cells = table.getElementsByTagName("td");
+            for (var i = 0; i < cells.length; i++) {
+                if(i == 0){
+        
+                    document.getElementById("compName").innerHTML= cells[0].innerText;
+                    setName(cells[0].innerText, cells[1].innerText);
+                }
+             }
+</script>
 
-<div class="month p-2"style="margin-left:5px:" >
-    <a href="#" class="form-control">April</a>
-    <a href="#" class="form-control">May</a>
-    <a href="#" class="form-control">June</a>
-    <a href="#" class="form-control">July</a>
-    <a href="#" class="form-control">August</a>
-    <a href="#" class="form-control">September</a>
-    <a href="#" class="form-control">October</a>
-    <a href="#" class="form-control">November</a>
-    <a href="#" class="form-control">December</a>
-    <a href="#" class="form-control">January</a>
-    <a href="#" class="form-control">February</a>
-    <a href="#" class="form-control">March</a>
-</div>
+<div class="month" >
+    <a href="#">April</a>
+    <a href="#">May</a>
+    <a href="#" >June</a>
+    <a href="#">July</a>
+    <a href="#">August</a>
+    <a href="#">September</a>
+    <a href="#">October</a>
+    <a href="#">November</a>
+    <a href="#">December</a>
 
+</div>
 {% endblock %}
+

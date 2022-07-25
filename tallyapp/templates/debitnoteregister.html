@@ -12,8 +12,8 @@
     {
         
         display: grid;
-        margin-left: 80px;
-        font-size:large
+        margin-left: 10px;
+        font-size:medium
     }
     .text{
         text:center;
@@ -28,47 +28,33 @@
 
 
 
-<div class="">
-<h6 class="bg-info text-light text-left">Debit Note Register</h6>
-<div  style="text-align: center;margin-top:-35px;font-weight:900">{{cmp.name}}</div>
-</div>
-       
-            
-
-
-
-                    <div class="row container-fluid p-0" style=" border: 1px solid rgba(128, 128, 128, 0.6); margin-top: 35px; margin-left: 0px;">
-                        
-                     <!--   <div class="col-sm-4  p-4" style=" border-right: 1px solid rgba(128, 128, 128, 0.6);margin-left: 500px;"> -->
-                        
-                        
-                            <div class="row container-fluid  p-2 m-0">
-                               
-                                  
-                                   <div class="col-sm-4 m-0 p-0 text-left" > <label >Particulars</label>
-                                    <div style="text-align: right; margin-top:-35px;margin-right:18px;font-size:11px"><b>Debit note</b>
-                                        <div style="margin-left:18px;font-weight: 900; font-size:15px;" id="compName"> </div>
-                    
-                                    </div>
-                                    
-                                    
-                        <div style="text-align: right;margin-top:-3px;margin-right:18px;font-weight:900" id="currentDate"></div>
-                                </div>
-                            
-                            
-                           
-                               
-                        
-                         </div>
-                         
-                    </div>
-                <!--                    <div class="col-sm-6 p-2 "style="margin-left:600px" >
-                        <h5 class="text-center">Mailing Details</h5>
-                </div> -->
+<div class="row container-fluid p-0 mx-0 justify-content-center">
+    <div class="col-sm-10 p-0" style="background-color:rgba(0,0,0,0.2);height: 100%;">
+        <div hidden id="cid">{{ cmp.id }}</div>
+        <div  class="bg-info text-light">&nbsp; &nbsp;  Debit Note Register<span style="margin-left: 40%;">{{cmp.name}}</span></div>
+        <div class="row container-fluid m-0 mt-4 w-100 p-0">
+            <span class="card border-bottom border-top w-75 rounded-0 contra_head">
+                <div class="card-body">
+                    <div class="card-text mt-3"><b>P a r t i c u l a r s</b></div>
                 </div>
-                
-               
-</div>
+            </span>
+            <span class="card border w-25 text-center rounded-0 contra_head">
+                <div class="card-body p-0">
+                    <div class="card-title border-bottom mb-0">
+                        <i id="Vname">Debit Note</i><br><b>{{cmp.name}}</b><br>For 
+                        
+                    </div>
+                    
+                    <div class="card-text border-bottom">
+                        <b>Transactions</b>
+                    </div>
+                    <div class="card-text row container-fluid p-0 ml-1">
+                        <span class="col-sm-6 border-right p-0">Total Vouchers</span>
+                        <span class="col-sm-6 p-0">(Cancelled)</span>
+                    </div>
+                </div>
+            </span>
+        </div>
 <script>
     document.getElementById("currentDate").innerHTML=new Date().toDateString();
     function setDate(){
@@ -84,6 +70,7 @@
                 }
              }
 </script>
+
 <div class="month" >
     <a href="#">April</a>
     <a href="#">May</a>

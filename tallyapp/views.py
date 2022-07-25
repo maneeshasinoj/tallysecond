@@ -12,8 +12,9 @@ def company(request):
     com=Companies.objects.all()
     return render(request,'company.html',{'com':com})
 
-def index1(request):
-    return render(request,'basepage.html')
+def base(request):
+    com=Companies.objects.all()
+    return render(request,'base.html')
 
 def getStates(request):
     return States.objects.all()
@@ -468,16 +469,19 @@ def receiptdetails(request):
 
 def partydetails(request):
     ledger=Ledger.objects.all()
-    return render(request,'partydetails.html',{'ledger':ledger})
+    states=States.objects.all()
+    data={}
+    data['ledger']=ledger
+    data['states']=states
+    return render(request,'partydetails.html',data)
 
-def debitnoteregister(request):
-    cmp=Companies.objects.all()
+def debitnoteregister(request,pk):
+    cmp=Companies.objects.get(id=pk)
     print(cmp)
     return render(request,'debitnoteregister.html',{'cmp':cmp})
 
-def creditnoteregister(request):
-    cmp=Companies.objects.all()
-    print(cmp)
+def creditnoteregister(request,pk):
+    cmp=Companies.objects.get(id=pk)
     return render(request,'creditnoteregister.html',{'cmp':cmp})
 
 def date(request):
@@ -502,7 +506,7 @@ def add_receiptdetails(request):
         invoicedate = request.POST['invoicedate']
         data=receiptdetails(tracking_no=trackingno,dispatch_Doc_No=dispatchno,dispatch_through=dsptchthrough,destination=destination,
                             carrier_name=carriername,bill_of_ladding_no=billoflading,date=date,motorvehicle_no=motorvehicleno,
-                            original_invoice_no=invoiceno,invoice_date=invoicedate,ledger=ledger)
+                            original_invoice_no=invoiceno,invoice_date=invoicedate)
         data.save()       
     return render(request,'partydetails.html')                     
 
@@ -512,7 +516,10 @@ def displaymore(request,pk):
     return render(request,'displaymore.html',context)
 
 def accountbook(request,pk):
-    
+    com  = Companies.objects.get(id=pk)
+    context = {'com':com}
+    return render(request,'accountbook.html',context)
+
 
 
 

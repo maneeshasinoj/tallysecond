@@ -202,11 +202,23 @@
                           
                         </li>
                         <li>
-                            <a href="" onclick="getVal('displaymore')">
-                                <div class="parent-icon"><i class="bx bx-file"></i>
+                            <a href="javascript:;" class="has-arrow">
+
+                                <div class="parent-icon"><i class='bx bx-home-alt'></i>
                                 </div>
-                                <div class="menu-title">Display More Reports</div>
+                                <div class="menu-title">Dispaly more Reports</div>
                             </a>
+                            <ul>
+                                <a onclick="getVal('displaymore')">
+                                    <div class="parent-icon"><i class="bx bx-file"></i>
+                                    </div>
+                                    <div class="menu-title">Display More Reports</div>
+                                </a>
+
+                                
+                                
+                            </ul>
+                            
                         </li>
                         <li>
                             <a href="{% url 'company' %}" >

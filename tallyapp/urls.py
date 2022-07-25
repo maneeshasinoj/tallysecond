@@ -3,7 +3,7 @@ from . import views
 urlpatterns = [
     path('',views.index,name='index'),
     path('company',views.company,name='company'),
-    path('index1',views.index1,name='index1'),
+    path('base',views.base,name='base'),
     path('createcompany',views.createcompany,name='createcompany'),
     path('companycreate',views.companycreate,name='companycreate'),
     path('group/<int:pk>',views.group,name='group'),
@@ -40,8 +40,10 @@ urlpatterns = [
     path('creditnote',views.creditnote,name='creditnote'),
     path('receiptdetails',views.receiptdetails,name='receiptdetails'),
     path('partydetails',views.partydetails,name='partydetails'),
-    path('debitnoteregister',views.debitnoteregister,name='debitnoteregister'),
-    path('creditnoteregister',views.creditnoteregister,name='creditnoteregister'),
+    path('debitnoteregister/<int:pk>',views.debitnoteregister,name='debitnoteregister'),
+    path('creditnoteregister/<int:pk>',views.creditnoteregister,name='creditnoteregister'),
     path('date',views.date,name='date'),
     path('add_receiptdetails',views.add_receiptdetails,name='add_receiptdetails'),
+    path('displaymore/<int:pk>',views.displaymore,name='displaymore'),
+    path('accountbook/<int:pk>',views.accountbook,name='accountbook'),
 ]
