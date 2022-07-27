@@ -72,20 +72,44 @@
             var mailingname = name.value;
             document.getElementById("mailingname").value= mailingname;
         }
+    function showunder()
+        {
+            document.getElementById('tbody').hidden=false
+        }
+  
+        function setvalue(val)
+    {
+         val= document.getElementById('credit');
+         v=1;
+            v=val.value + value;
+            document.getElementById('credit').value=v;
+    }
 </script> 
   <div class="m-0" style="width: 800px;margin-left: 100px;">
      <!---->
        
-    <h6 class="bg-info text-light p-1 m-1 text-left">Credit Note</h6>
+    <h6 class="bg-info text-light p-1 m-1 text-left">Accounting Voucher Creation</h6>
     
     <div  style="text-align: center;margin-top:-35px;font-weight:900">{{cmp.name}}</div>
+
+   
 
             <form  style="background-color:rgba(0,0,0,.4);" method="post" action="#">
                 {% csrf_token %}
                 
-                <div class="row container-fluid p-0 m-0" >
+               
+                <div class="row container-fluid p-0 mt-4" >
 
+                   
                     <div class="col-sm-6 m-0 p-4">
+
+                        <div class="row container-fluid  p-2 m-0">
+                            <div class="col-sm-4 m-0 p-0"> <label >Credit note</label></div>
+                            <div class="col-sm-8 m-0 p-0"> 
+                            <input type="text" class="form-control" id="" value="1" name="credit" onclick="setvalue(value)"></div>
+                        </div>
+    
+                       
 
                         <div class="row container-fluid  p-2 m-0">
                             <div class="col-sm-4 m-0 p-0"> <label >Party A/c Name</label></div>
@@ -95,7 +119,7 @@
                         <div class="row container-fluid  p-2 m-0">
                             <div class="col-sm-4 m-0 p-0"> <label >Ledger Account</label></div>
                             <div class="col-sm-8 m-0 p-0"> 
-                            <input type="text" class="form-control" id="" placeholder="" name="ledger"></div>
+                            <input type="text" class="form-control" id="" placeholder=""   name="ledger" onclick="showunder()"></div>
                         </div>
 
 
@@ -104,7 +128,7 @@
               
 
            <div class="row container-fluid  p-0 m-0" style=" border: 1px solid rgba(128, 128, 128, 0.6);"> 
-      <!-- <div class="col-sm-4 m-0 p-4" style=" border-right: 1px solid rgba(128, 128, 128, 0.6);">  -->
+      <!-- <div class="col-sm-4 m-0 p-4" style=" border-right: 1px solid rgba(128, 128, 128, 0.6);">  --><!--
                     
 
                     <div class="row container-fluid  p-2 m-0">
@@ -112,17 +136,107 @@
                         
                     </div>
                     
-                
-
-            </div>
+                    <div class="bankac hide p-0 m-0 w-100" id="bankac" hidden>
         
+                        <h6 class="p-3">Bank Account Details</h6>
+                
+                        <div class="row container-fluid  p-2 m-0">
+                            <div class="col-sm-6 m-0 p-0"> <label for="pan">A/c Holder's Name</label></div>
+                            <div class="col-sm-6 m-0 p-0"><input type="text" value="{{cmp.name}}" class="form-control" id="acna" placeholder="" name="holder_name"></div>
+                            
+                        </div>
+                 
+
+            </div>-->
+            <div class="row container-fluid m-0 mt-2 w-100 p-0">
            
+                <table class="table p-0 m-0" id="pTable">
+                    
+                        <thead>
+                            <tr>
+                                <th>Name of item</th>
+                                <th>Quantity</th>
+                                <th>Rate per</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody hidden id="tbody" name="tbody">
+                        <tr>
+                            <td>
+                            <input type="text" name="item" class="form-control" style="width: 200px;">
+                            </td>
+                           <!--
+                            <td class="w-100 m-0 p-0 pl-3" style="cursor: pointer;"><a type="button"> April</td></a>
+                            
+                             <td class="w-25 m-0 p-0 text-center">dfdgfd</td> 
+                             <td class="w-25 m-0 p-0 text-center">dfdgfd</td> 
+                             <td class="w-25 m-0 pl-0 text-center">dfdgfd</td> -->
+                        
+                        
+                            <td>
+                                <input type="text" name="item" class="form-control" style="width: 100px;">
+                                </td>
+                            <!--
+                            <td class="w-100 m-0 p-0 pl-3" style="cursor: pointer;"><a>May </a></td>
+                            <td class="w-25 m-0 p-0 text-center"></td> -->
+                        
+                        
+                            <td>
+                                <input type="text" class="form-control" name="item" style="width: 100px;">
+                                </td>
+                            <!--
+                            <td class="w-100 m-0 p-0 pl-3" style="cursor: pointer;"><a>June</a></td>
+                            <td class="w-25 m-0 p-0 text-center">dfs</td> -->
+                    
+                            <td>
+                            <input type="text" name="item" class="form-control" style="width: 100px;">
+                            </td>
+
+                            <!--
+                            <td class="w-75 m-0 p-0 pl-3" style="cursor: pointer;"><a>July</a></td>
+                            <td class="w-25 m-0 p-0 text-center">dfs</td> -->
+                        </tr>
+                        <tr>
+                            <!--
+                            <td class="w-75 m-0 p-0 pl-3" style="cursor: pointer;"><a>August</a></td>
+                            <td class="w-25 m-0 p-0 text-center">dfs</td> -->
+                        </tr>
+                        <tr>
+                            <!--
+                            <td class="w-75 m-0 p-0 pl-3" style="cursor: pointer;"><a>September</a></td>
+                            <td class="w-25 m-0 p-0 text-center">dfs</td> -->
+                        </tr>
+                      
+    
+                    </tbody>
+                </table>
+            </div>
+            <div class="row container-fluid m-0 w-100 p-0">
+                <table class="table p-0 m-0">
+                    <tbody>
+                        <tr>
+                            <td class="w-75 m-0 p-0 pl-3">Grand Total</td>
+                            <td class="w-25 m-0 p-0 text-center">0000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>   
+                
+        </form>
+  </div>
+  
+
+            
+            <div class="enter w-100 py-4"><button class="btn btn-info w-25 px-4">CREATE</button></div>   
+                
+       
+
                 
                 <!-- Listing -->
               
-                <div class="row container" style="margin-block-start: -205px;margin-left: 530px;">
-                    <div class="col-sm-4 m-1 p-1"></div>
-                    <div class="col-sm-4 m-1 p-1" style=" background-color:rgba(0,0,0,0.2); height: 400px; padding-bottom: 10px;">
+                <div class="row container " style="margin-block-start: -390px;margin-left: 530px;justify-content: end;">
+                    <div class="col-sm-6 m-1 p-1"></div>
+                    <div class="col-sm-6 m-1 p-1" style=" background-color:rgba(0,0,0,0.2); height: 400px; padding-bottom: 10px;">
                         <!-- <a href="javascript:history.go(-1);" class="close">+</a> -->
                     <div  class="bg-info text-light">List of Ledger Accounts</div>
                            <div>
@@ -155,10 +269,6 @@
         
        
             
-                <div class="enter w-100 py-4"><button class="btn btn-info w-25 px-4">CREATE</button></div>   
-                
-            </form>
-
  
            
     {% endblock %}

@@ -1,4 +1,6 @@
+from calendar import month_name
 from re import A
+from xmlrpc.client import _datetime_type
 from django.shortcuts import render,redirect
 from .models import *
 from django.contrib import messages
@@ -494,7 +496,7 @@ def add_receiptdetails(request):
     
     if request.method=='POST' :
 
-        trackingno = request.POST['trackno']
+        trackingno = request.POST['tracking_no']
         dispatchno = request.POST['dispatchno']
         dsptchthrough = request.POST['dsptchthrough']
         destination = request.POST['destination']
@@ -504,8 +506,8 @@ def add_receiptdetails(request):
         date = request.POST['date']
         invoiceno = request.POST['invoiceno']
         invoicedate = request.POST['invoicedate']
-        data=receiptdetails(tracking_no=trackingno,dispatch_Doc_No=dispatchno,dispatch_through=dsptchthrough,destination=destination,
-                            carrier_name=carriername,bill_of_ladding_no=billoflading,date=date,motorvehicle_no=motorvehicleno,
+        data=receipt(tracking_no=trackingno,dispatch_Doc_No=dispatchno,dispatch_through=dsptchthrough,destination=destination,
+                            carrier_name=carriername,bill_of_lading_no=billoflading,date=date,motorvehicle_no=motorvehicleno,
                             original_invoice_no=invoiceno,invoice_date=invoicedate)
         data.save()       
     return render(request,'partydetails.html')                     
@@ -519,7 +521,12 @@ def accountbook(request,pk):
     com  = Companies.objects.get(id=pk)
     context = {'com':com}
     return render(request,'accountbook.html',context)
+    
+def voucherregister(request):
+    voucher=creditenote.objects.all()
+    vouher=creditenote.objects.filter(date='2022-4-1')
 
+    return render(request,'voucherregister.html',{'voucher':voucher})
 
 
 

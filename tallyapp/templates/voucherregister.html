@@ -13,27 +13,18 @@
 </style>
 
 <div class="">
-<h6 style="font-size: 25px;text-align: left;" class="bg-info text-light"><b>Voucher Register</b></h6>
+<h6 style="font-size: 20px;text-align: left;" class="bg-info text-light"><b>Voucher Register</b></h6>
 <div  style="text-align: center;margin-top:-35px;font-weight:900">{{cmp.name}}</div>
 </div>
 <div class="row container-fluid  p-2 m-0">
                                
                                   
     <div class="col-sm-4 m-4" style="text-align:left">List of all Credit Note Vouchers
-     <div style="text-align: right; margin-top:-35px;margin-right:18px;font-size:11px"><b>Debit note</b>
-         <div style="margin-left:18px;font-weight: 900; font-size:15px;" id="compName"> </div>
+        <div id="dateP1" style="font-weight: 900;margin-left:18px; text-align: end;">1-Apr-2022 to 30 Apr-2022</div>
+        
 
      </div>
      
-     
-<div style="text-align: right;margin-top:-3px;margin-right:18px;font-weight:900" id="currentDate"></div>
- </div>
-
-
-
-
-
-</div>
 
 </div>
 <script>
@@ -50,27 +41,22 @@
             <th>Particulars</th>
             <th>Voucher type</th>
             <th>Voucher No.</th>
-            <th>Credit Amount</th>
             <th>Debit Amount</th>
+            <th>Credit Amount</th>
             
         </tr>
     </thead>
     <tbody>
-        {% for p in emp %}
+        {% for p in voucher %}
             <tr>
-                <td>{{ p.id }}</td>
-                <td>{{ p.employee_name }}</td>
-                <td>{{ p.address }}</td>
-                <td>{{ p.age }}</td>
-                <td>{{ p.email_id }}</td>
-                <td>{{ p.joindate }}</td>
+                <td>{{ p.date }}</td>
+                <td>{{ p.particulars }}</td>
+                <td>{{ p.vouchertype }}</td>
+                <td>{{ p.voucherno }}</td>
+                <td>{{ p.debitamount }}</td>
+                <td>{{ p.creditamount }}</td>
                 
-                <td>{{ p.qualification }}</td>
-                <td>{{ p.gender }}</td>
-                <td>
-                    <a href="{% url 'editpage' p.id %}" class="btn btn-info mt-3 w-100">Edit</a><br>
-                <a href="{% url 'deletepage' p.id %}" class="btn btn-danger mt-3 w-100">Delete</a>
-                </td>
+                
             </tr>
         {% endfor%}
     </tbody>

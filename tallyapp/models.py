@@ -168,3 +168,25 @@ class receiptdetails(models.Model):
     original_invoice_no=models.CharField(max_length=225)
     invoice_date=models.DateField()
     ledger = models.ForeignKey(Ledger, on_delete=models.CASCADE, blank=True,null=True)
+
+class receipt(models.Model):
+    tracking_no=models.CharField(max_length=225)
+    dispatch_Doc_No=models.CharField(max_length=225)
+    dispatch_through=models.CharField(max_length=225)
+    destination=models.CharField(max_length=225)
+    carrier_name=models.CharField(max_length=225)
+    bill_of_lading_no=models.CharField(max_length=225)
+    date=models.DateField()
+    motorvehicle_no=models.CharField(max_length=225)
+    original_invoice_no=models.CharField(max_length=225)
+    invoice_date=models.DateField()
+    ledger = models.ForeignKey(Ledger, on_delete=models.CASCADE, blank=True,null=True)
+    voucher=models.ForeignKey(Voucher,on_delete=models.CASCADE,blank=True,null=True)
+
+class creditenote(models.Model):
+    date=models.DateField()
+    particulars=models.CharField(max_length=255)
+    vouchertype=models.CharField(max_length=255)
+    voucherno=models.IntegerField()
+    debitamount=models.IntegerField()
+    creditamount=models.IntegerField()

@@ -47,3 +47,4 @@ admin.site.register(Ledger_Asset_Statutory)
 
 admin.site.register(Ledger_Sundry)
 admin.site.register(receiptdetails)
+admin.site.register(creditenote)
