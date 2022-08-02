@@ -528,6 +528,12 @@ def voucherregister(request):
 
     return render(request,'voucherregister.html',{'voucher':voucher})
 
+def voucherregisterdebit(request):
+    vouchers=debitnote.objects.all()
+    vouher=debitnote.objects.filter(date='2022-4-1')
+
+    return render(request,'voucherregister.html',{'vouchers':vouchers})
+
 
 
 

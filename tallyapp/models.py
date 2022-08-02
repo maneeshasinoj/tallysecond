@@ -190,3 +190,12 @@ class creditenote(models.Model):
     voucherno=models.IntegerField()
     debitamount=models.IntegerField()
     creditamount=models.IntegerField()
+
+
+class debitnote(models.Model):
+    date=models.DateField()
+    particulars=models.CharField(max_length=255)
+    vouchertype=models.CharField(max_length=255)
+    voucherno=models.IntegerField()
+    debitamount=models.IntegerField()
+    creditamount=models.IntegerField()

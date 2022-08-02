@@ -47,4 +47,5 @@ urlpatterns = [
     path('displaymore/<int:pk>',views.displaymore,name='displaymore'),
     path('accountbook/<int:pk>',views.accountbook,name='accountbook'),
     path('voucherregister',views.voucherregister,name='voucherregister'),
+    path('voucherregisterdebit',views.voucherregisterdebit,name='voucherregisterdebit'),
 ]
