@@ -465,6 +465,14 @@ def creditnote(request):
     ledger=Ledger.objects.all()
     return render(request,'creditnote.html',{'ledger':ledger})
 
+def debitenote(request):
+    ledger=Ledger.objects.all()
+    stock=stockitem.objects.all()
+    data={}
+    data['ledger']=ledger
+    data['stock']=stock
+    return render(request,'debitnote.html',data)
+
 
 def receiptdetails(request):
     return render(request,'receiptdetails.html')

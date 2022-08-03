@@ -38,6 +38,7 @@ urlpatterns = [
     path('alter_create_group/<int:pk>',views.alter_create_group,name='alter_create_group'),
     path('vouchers',views.vouchers,name='vouchers'),
     path('creditnote',views.creditnote,name='creditnote'),
+    path('debitenote',views.debitenote,name='debitenote'),
     path('receiptdetails',views.receiptdetails,name='receiptdetails'),
     path('partydetails',views.partydetails,name='partydetails'),
     path('debitnoteregister/<int:pk>',views.debitnoteregister,name='debitnoteregister'),

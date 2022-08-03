@@ -199,3 +199,9 @@ class debitnote(models.Model):
     voucherno=models.IntegerField()
     debitamount=models.IntegerField()
     creditamount=models.IntegerField()
+
+class stockitem(models.Model):
+    name=models.CharField(max_length=255)
+    alias=models.CharField(max_length=255,null=True)
+    under=models.CharField(max_length=255)
+    units=models.CharField(max_length=255)
