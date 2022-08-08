@@ -205,3 +205,4 @@ class stockitem(models.Model):
     alias=models.CharField(max_length=255,null=True)
     under=models.CharField(max_length=255)
     units=models.CharField(max_length=255)
+    
