@@ -49,4 +49,5 @@ urlpatterns = [
     path('accountbook/<int:pk>',views.accountbook,name='accountbook'),
     path('voucherregister',views.voucherregister,name='voucherregister'),
     path('voucherregisterdebit',views.voucherregisterdebit,name='voucherregisterdebit'),
+    path('creditsave',views.creditsave,name='creditsave')
 ]

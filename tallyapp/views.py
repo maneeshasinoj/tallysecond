@@ -1,11 +1,12 @@
 from calendar import month_name
+from datetime import datetime
 from re import A
 from xmlrpc.client import _datetime_type
 from django.shortcuts import render,redirect
 from .models import *
 from django.contrib import messages
 from django.http import JsonResponse
-from tallyapp.models import receiptdetails
+from tallyapp.models import receiptdetails,units
 def index(request):
     comp=Companies.objects.all()
     return render(request,'index.html',{'comp':comp})
@@ -463,14 +464,22 @@ def vouchers(request):
 
 def creditnote(request):
     ledger=Ledger.objects.all()
-    return render(request,'creditnote.html',{'ledger':ledger})
+    stock=stockitem.objects.all()
+    unit=units.objects.all()
+    data={}
+    data['ledger']=ledger
+    data['stock']=stock
+    data['unit']=unit
+    return render(request,'creditnote.html',data)
 
 def debitenote(request):
     ledger=Ledger.objects.all()
     stock=stockitem.objects.all()
+    unit=units.objects.all()
     data={}
     data['ledger']=ledger
     data['stock']=stock
+    data['unit']= unit
     return render(request,'debitnote.html',data)
 
 
@@ -542,6 +551,16 @@ def voucherregisterdebit(request):
 
     return render(request,'voucherregister.html',{'vouchers':vouchers})
 
+def creditsave(request):
+    if request.method=='POST' :
+    
+        item = request.POST['stock']
+        vouchno=request.POST['credit']
+        amount=request.POST['total']
+        date=str(datetime.month)
+        credit=creditenote(date=date,particulars=item,voucherno=vouchno,vouchertype="credit",credotamount=amount)
+        credit.save()
+    return render(request,'creditnote.html')
 
 
 

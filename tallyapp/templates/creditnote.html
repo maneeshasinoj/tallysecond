@@ -95,6 +95,24 @@
             v=val.value + value;
             document.getElementById('credit').value=v;
     }
+    function setstock(names)
+    {
+        document.getElementById('stock').value=names;
+  }
+  function addamount(){
+    a=Number(document.getElementById('qty').value);
+    b=Number(document.getElementById('rate').value);
+    c=a*b;
+    document.getElementById('amount').value=c;
+    document.getElementById('total').value=c;
+    
+}
+function setnext()
+        {
+            document.getElementById('tbody').hidden=false
+            document.getElementById('tbodys').hidden=false
+            n=n+1;
+        }
 </script> 
   <div class="m-0" style="width: 800px;margin-left: 100px;">
      <!---->
@@ -102,10 +120,10 @@
     <h6 class="bg-info text-light p-1 m-1 text-left">Accounting Voucher Creation</h6>
     
     <div  style="text-align: center;margin-top:-35px;font-weight:900">{{cmp.name}}</div>
-
+    <h4 style="text-align:right;margin-top:-35px;font-weight:900">date<input type="date" name="date"></h4>
    
 
-            <form  style="background-color:rgba(0,0,0,.4);" method="post" action="#">
+            <form  style="background-color:rgba(0,0,0,.4);" method="post" action="{% url 'creditsave' %}">
                 {% csrf_token %}
                 
                
@@ -171,74 +189,140 @@
                                 <th>Amount</th>
                             </tr>
                         </thead>
-                        <tbody hidden id="tbody" name="tbody">
-                        <tr>
-                            <td>
-                            <input type="text" name="item" class="form-control" onclick="showVouchers()" style="width: 200px;">
-                            </td>
-                           <!--
-                            <td class="w-100 m-0 p-0 pl-3" style="cursor: pointer;"><a type="button"> April</td></a>
+                        <div class="table" >
+                        <tbody hidden name="tbody" id="tbody">
+                            <tr>
+                                <td>
+                                <input type="text" id="stock" name="stock" class="form-control" placeholder="" onclick="showVouchers()" style="width: 200px;">
+                                </td>
+                               <!--
+                                <td class="w-100 m-0 p-0 pl-3" style="cursor: pointer;"><a type="button"> April</td></a>
+                                
+                                 <td class="w-25 m-0 p-0 text-center">dfdgfd</td> 
+                                 <td class="w-25 m-0 p-0 text-center">dfdgfd</td> 
+                                 <td class="w-25 m-0 pl-0 text-center">dfdgfd</td> -->
                             
-                             <td class="w-25 m-0 p-0 text-center">dfdgfd</td> 
-                             <td class="w-25 m-0 p-0 text-center">dfdgfd</td> 
-                             <td class="w-25 m-0 pl-0 text-center">dfdgfd</td> -->
+                            
+                              
+                                <!--
+                                <td class="w-100 m-0 p-0 pl-3" style="cursor: pointer;"><a>May </a></td>
+                                <td class="w-25 m-0 p-0 text-center"></td> -->
+                            
+                            
+                                <td>
+                                    <input type="text" class="form-control" name="rate" id="rate" placeholder="0" style="width: 100px;">
+                                    </td>
+                                    <td>
+                                        <select class="form-control" name="select" >
+                                            {% for units in unit %}
+                                            <option value="{{ category.id }}">{{ units.symbol }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="qty" id="qty" class="form-control" placeholder="0" onkeyup="addamount()" style="width: 100px;">
+                                            </td>
+                                <!--
+                                <td class="w-100 m-0 p-0 pl-3" style="cursor: pointer;"><a>June</a></td>
+                                <td class="w-25 m-0 p-0 text-center">dfs</td> -->
                         
-                        
-                            <td>
-                                <input type="text" name="item" class="form-control" style="width: 100px;">
+                                <td>
+                                <input type="text" name="amount" id="amount" class="form-control" placeholder="0"  style="width: 100px;">
                                 </td>
-                            <!--
-                            <td class="w-100 m-0 p-0 pl-3" style="cursor: pointer;"><a>May </a></td>
-                            <td class="w-25 m-0 p-0 text-center"></td> -->
-                        
-                        
-                            <td>
-                                <input type="text" class="form-control" name="item" style="width: 100px;">
+                                <td>
+                                    <button id="next" onclick="setnext()">Next</button>
                                 </td>
-                            <!--
-                            <td class="w-100 m-0 p-0 pl-3" style="cursor: pointer;"><a>June</a></td>
-                            <td class="w-25 m-0 p-0 text-center">dfs</td> -->
-                    
-                            <td>
-                            <input type="text" name="item" class="form-control" style="width: 100px;">
-                            </td>
-
-                            <!--
-                            <td class="w-75 m-0 p-0 pl-3" style="cursor: pointer;"><a>July</a></td>
-                            <td class="w-25 m-0 p-0 text-center">dfs</td> -->
-                        </tr>
-                        <tr>
-                            <!--
-                            <td class="w-75 m-0 p-0 pl-3" style="cursor: pointer;"><a>August</a></td>
-                            <td class="w-25 m-0 p-0 text-center">dfs</td> -->
-                        </tr>
-                        <tr>
-                            <!--
-                            <td class="w-75 m-0 p-0 pl-3" style="cursor: pointer;"><a>September</a></td>
-                            <td class="w-25 m-0 p-0 text-center">dfs</td> -->
-                        </tr>
-                      
-    
-                    </tbody>
-                </table>
-            </div>
-            <div class="row container-fluid m-0 w-100 p-0">
-                <table class="table p-0 m-0">
-                    <tbody>
-                        <tr>
-                            <td class="w-75 m-0 p-0 pl-3">Grand Total</td>
-                            <td class="w-25 m-0 p-0 text-center">0000</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>   
+                                <!--
+                                <td class="w-75 m-0 p-0 pl-3" style="cursor: pointer;"><a>July</a></td>
+                                <td class="w-25 m-0 p-0 text-center">dfs</td> -->
+                            </tr>
+                            <tr>
+                                <!--
+                                <td class="w-75 m-0 p-0 pl-3" style="cursor: pointer;"><a>August</a></td>
+                                <td class="w-25 m-0 p-0 text-center">dfs</td> -->
+                            </tr>
+                            <tr>
+                                <!--
+                                <td class="w-75 m-0 p-0 pl-3" style="cursor: pointer;"><a>September</a></td>
+                                <td class="w-25 m-0 p-0 text-center">dfs</td> -->
+                            </tr>
+                          
+        
+                        </tbody>
                 
-        </form>
-  </div>
+            
+                    
+                        <tbody hidden name="tbodys" id="tbodys">
+                            <tr>
+                                <td>
+                                <input type="text" id="stock" name="stock" class="form-control" placeholder="" onclick="showVouchers()" style="width: 200px;">
+                                </td>
+                               <!--
+                                <td class="w-100 m-0 p-0 pl-3" style="cursor: pointer;"><a type="button"> April</td></a>
+                                
+                                 <td class="w-25 m-0 p-0 text-center">dfdgfd</td> 
+                                 <td class="w-25 m-0 p-0 text-center">dfdgfd</td> 
+                                 <td class="w-25 m-0 pl-0 text-center">dfdgfd</td> -->
+                            
+                            
+                              
+                                <!--
+                                <td class="w-100 m-0 p-0 pl-3" style="cursor: pointer;"><a>May </a></td>
+                                <td class="w-25 m-0 p-0 text-center"></td> -->
+                            
+                            
+                                <td>
+                                    <input type="text" class="form-control" name="rate" id="rate" placeholder="0" style="width: 100px;">
+                                    </td>
+                                    <td>
+                                        <select class="form-control" name="select" >
+                                            {% for units in unit %}
+                                            <option value="{{ category.id }}">{{ units.symbol }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="qty" id="qty" class="form-control" placeholder="0" onkeyup="addamount()" style="width: 100px;">
+                                            </td>
+                                <!--
+                                <td class="w-100 m-0 p-0 pl-3" style="cursor: pointer;"><a>June</a></td>
+                                <td class="w-25 m-0 p-0 text-center">dfs</td> -->
+                        
+                                <td>
+                                <input type="text" name="amount" id="amount" class="form-control" placeholder="0"  style="width: 100px;">
+                                </td>
+                                <td>
+                                    <button id="next" onclick="setnext()">Next</button>
+                                </td>
+                                <!--
+                                <td class="w-75 m-0 p-0 pl-3" style="cursor: pointer;"><a>July</a></td>
+                                <td class="w-25 m-0 p-0 text-center">dfs</td> -->
+                            </tr>
+                        </div>
+                          
+        
+                        </tbody>
+                    </table>
+    
+                
+                </div>
+                <div class="row container-fluid m-0 w-100 p-0">
+                    <table class="table p-0 m-0">
+                        <tbody>
+                            <tr>
+                                <td class="w-75 m-0 p-0 pl-3">Grand Total</td>
+                                <td class="w-25 m-0 p-0 text-center"><input type="text" class="form-control" placeholder="00" id="total" readonly></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>   
+                    
+            </form>
+      </div>
   
 
             
-            <div class="enter w-100 py-4"><button class="btn btn-info w-25 px-4">CREATE</button></div>   
+            <div class="enter w-100 py-4"><button class="btn btn-info w-25 px-4">SAVE</button></div>   
                 
        
 

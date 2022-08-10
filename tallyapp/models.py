@@ -188,7 +188,7 @@ class creditenote(models.Model):
     particulars=models.CharField(max_length=255)
     vouchertype=models.CharField(max_length=255)
     voucherno=models.IntegerField()
-    debitamount=models.IntegerField()
+    debitamount=models.IntegerField(null=True)
     creditamount=models.IntegerField()
 
 
@@ -198,7 +198,7 @@ class debitnote(models.Model):
     vouchertype=models.CharField(max_length=255)
     voucherno=models.IntegerField()
     debitamount=models.IntegerField()
-    creditamount=models.IntegerField()
+    creditamount=models.IntegerField(null=True)
 
 class stockitem(models.Model):
     name=models.CharField(max_length=255)
@@ -206,3 +206,9 @@ class stockitem(models.Model):
     under=models.CharField(max_length=255)
     units=models.CharField(max_length=255)
     
+class units(models.Model):
+    type=models.CharField(max_length=255)
+    symbol=models.CharField(max_length=255)
+    formal_name=models.CharField(max_length=255)
+    unitquantity_code=models.CharField(max_length=255)
+    no_of_decimalplaces=models.IntegerField()

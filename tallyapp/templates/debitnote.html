@@ -12,15 +12,13 @@
     </style>
 
 <script>
-    function showVouchers(){
-      
-      document.getElementById('voucherPop').style.visibility= "visible";
-      document.getElementById('voucherPop').style.display = "block";  
-     
-  }
+    
     function showVouchers(){
         document.getElementById('voucherPop').style.visibility= "visible";
         document.getElementById('voucherPop').style.display = "block";  
+
+        document.getElementById('list').style.visibility= "hidden";
+        document.getElementById('list').style.display = "none";   
     }
     window.addEventListener('click',outsideClick)
     function outsideClick(event){
@@ -95,6 +93,25 @@
             v=val.value + value;
             document.getElementById('credit').value=v;
     }
+    function setstock(names)
+    {
+        document.getElementById('stock').value=names;
+       
+  }
+  function addamount(){
+    a=Number(document.getElementById('qty').value);
+    b=Number(document.getElementById('rate').value);
+    c=a*b;
+    document.getElementById('amount').value=c;
+    document.getElementById('total').value=c;
+    document.getElementById('tbodys').hidden=false
+}
+function shownext()
+        {
+            document.getElementById('tbody').hidden=false
+            document.getElementById('tbodys').hidden=false
+            n=n+1;
+        }
 </script> 
   <div class="m-0" style="width: 800px;margin-left: 100px;">
      <!---->
@@ -166,15 +183,19 @@
                         <thead>
                             <tr>
                                 <th>Name of item</th>
-                                <th>Quantity</th>
-                                <th>Rate per</th>
+                                <th>Rate </th>
+                            <th>Rate/per</th>
+                            <th>Quantity</th>
                                 <th>Amount</th>
                             </tr>
                         </thead>
-                        <tbody hidden id="tbody" name="tbody">
+                       
+                       
+                    
+                        <tbody hidden name="tbody" id="tbody">
                         <tr>
                             <td>
-                            <input type="text" name="item" class="form-control" onclick="showVouchers()" style="width: 200px;">
+                            <input type="text" id="stock" name="stock" class="form-control" placeholder="" onclick="showVouchers()" style="width: 200px;">
                             </td>
                            <!--
                             <td class="w-100 m-0 p-0 pl-3" style="cursor: pointer;"><a type="button"> April</td></a>
@@ -184,25 +205,95 @@
                              <td class="w-25 m-0 pl-0 text-center">dfdgfd</td> -->
                         
                         
-                            <td>
-                                <input type="text" name="item" class="form-control" style="width: 100px;">
-                                </td>
+                          
                             <!--
                             <td class="w-100 m-0 p-0 pl-3" style="cursor: pointer;"><a>May </a></td>
                             <td class="w-25 m-0 p-0 text-center"></td> -->
                         
                         
                             <td>
-                                <input type="text" class="form-control" name="item" style="width: 100px;">
+                                <input type="text" class="form-control" name="rate" id="rate" placeholder="0" style="width: 100px;">
                                 </td>
+                                <td>
+                                    <select class="form-control" name="select" >
+                                        {% for units in unit %}
+                                        <option value="{{ category.id }}">{{ units.symbol }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    </td>
+                                    <td>
+                                        <input type="text" name="qty" id="qty" class="form-control" placeholder="0" onkeyup="addamount()" style="width: 100px;">
+                                        </td>
                             <!--
                             <td class="w-100 m-0 p-0 pl-3" style="cursor: pointer;"><a>June</a></td>
                             <td class="w-25 m-0 p-0 text-center">dfs</td> -->
                     
                             <td>
-                            <input type="text" name="item" class="form-control" style="width: 100px;">
+                            <input type="text" name="amount" id="amount" class="form-control" placeholder="0"  style="width: 100px;">
                             </td>
-
+                            <td>
+                                <button id="nexts" >Next</button>
+                            </td>
+                            <!--
+                            <td class="w-75 m-0 p-0 pl-3" style="cursor: pointer;"><a>July</a></td>
+                            <td class="w-25 m-0 p-0 text-center">dfs</td> -->
+                        </tr>
+                        <tr>
+                            <!--
+                            <td class="w-75 m-0 p-0 pl-3" style="cursor: pointer;"><a>August</a></td>
+                            <td class="w-25 m-0 p-0 text-center">dfs</td> -->
+                        </tr>
+                        <tr>
+                            <!--
+                            <td class="w-75 m-0 p-0 pl-3" style="cursor: pointer;"><a>September</a></td>
+                            <td class="w-25 m-0 p-0 text-center">dfs</td> -->
+                        </tr>
+                      
+    
+                    </tbody>
+                
+                    <tbody hidden name="tbodys" id="tbodys">
+                        <tr>
+                            <td>
+                            <input type="text" id="stock" name="stock" class="form-control" placeholder="" onclick="showVouchers()" style="width: 200px;">
+                            </td>
+                           <!--
+                            <td class="w-100 m-0 p-0 pl-3" style="cursor: pointer;"><a type="button"> April</td></a>
+                            
+                             <td class="w-25 m-0 p-0 text-center">dfdgfd</td> 
+                             <td class="w-25 m-0 p-0 text-center">dfdgfd</td> 
+                             <td class="w-25 m-0 pl-0 text-center">dfdgfd</td> -->
+                        
+                        
+                          
+                            <!--
+                            <td class="w-100 m-0 p-0 pl-3" style="cursor: pointer;"><a>May </a></td>
+                            <td class="w-25 m-0 p-0 text-center"></td> -->
+                        
+                        
+                            <td>
+                                <input type="text" class="form-control" name="rate" id="rate" placeholder="0" style="width: 100px;">
+                                </td>
+                                <td>
+                                    <select class="form-control" name="select" >
+                                        {% for units in unit %}
+                                        <option value="{{ category.id }}">{{ units.symbol }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    </td>
+                                    <td>
+                                        <input type="text" name="qty" id="qty" class="form-control" placeholder="0" onkeyup="addamount()" style="width: 100px;">
+                                        </td>
+                            <!--
+                            <td class="w-100 m-0 p-0 pl-3" style="cursor: pointer;"><a>June</a></td>
+                            <td class="w-25 m-0 p-0 text-center">dfs</td> -->
+                    
+                            <td>
+                            <input type="text" name="amount" id="amount" class="form-control" placeholder="0"  style="width: 100px;">
+                            </td>
+                            <td>
+                                <button id="next" onclick="shownext()">Next</button>
+                            </td>
                             <!--
                             <td class="w-75 m-0 p-0 pl-3" style="cursor: pointer;"><a>July</a></td>
                             <td class="w-25 m-0 p-0 text-center">dfs</td> -->
@@ -221,13 +312,15 @@
     
                     </tbody>
                 </table>
+
+            
             </div>
             <div class="row container-fluid m-0 w-100 p-0">
                 <table class="table p-0 m-0">
                     <tbody>
                         <tr>
                             <td class="w-75 m-0 p-0 pl-3">Grand Total</td>
-                            <td class="w-25 m-0 p-0 text-center">0000</td>
+                            <td class="w-25 m-0 p-0 text-center"><input type="text" class="form-control" placeholder="00" id="total" readonly></td>
                         </tr>
                     </tbody>
                 </table>
@@ -238,14 +331,14 @@
   
 
             
-            <div class="enter w-100 py-4"><button class="btn btn-info w-25 px-4">CREATE</button></div>   
+            <div class="enter w-100 py-4"><button class="btn btn-info w-25 px-4">SAVE</button></div>   
                 
        
 
                 
                 <!-- Listing -->
               
-                <div class="row container " style="margin-block-start: -390px;margin-left: 530px;justify-content: end;">
+                <div class="row container " id="list" style="margin-block-start: -390px;margin-left: 530px;justify-content: end;">
                     <div class="col-sm-6 m-1 p-1"></div>
                     <div class="col-sm-6 m-1 p-1" style=" background-color:rgba(0,0,0,0.2); height: 400px; padding-bottom: 10px;">
                         <!-- <a href="javascript:history.go(-1);" class="close">+</a> -->
