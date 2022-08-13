@@ -457,12 +457,13 @@ def alter_create_group(request,pk):
 
     #######################################################################################3
 
-def vouchers(request):
-    com=Companies.objects.all()
-    return render(request,"vouchers.html")
+def vouchers(request,pk):
+    com=Companies.objects.get(id=pk)
+    return render(request,"vouchers.html",{'com':com})
 
 
-def creditnote(request):
+def creditnote(request,pk):
+    com=Companies.objects.get(id=pk)
     ledger=Ledger.objects.all()
     stock=stockitem.objects.all()
     unit=units.objects.all()
@@ -470,6 +471,7 @@ def creditnote(request):
     data['ledger']=ledger
     data['stock']=stock
     data['unit']=unit
+    data['com']=com
     return render(request,'creditnote.html',data)
 
 def debitenote(request):
@@ -527,7 +529,18 @@ def add_receiptdetails(request):
                             carrier_name=carriername,bill_of_lading_no=billoflading,date=date,motorvehicle_no=motorvehicleno,
                             original_invoice_no=invoiceno,invoice_date=invoicedate)
         data.save()       
-    return render(request,'partydetails.html')                     
+    return render(request,'partydetails.html')  
+
+def add_partydetails(request):
+    if request.method=='POST' :
+        name=request.POST['name']  
+        mailing_address=request.POST['mailingname']     
+        address=request.POST['address']    
+        state=request.POST['state']   
+        country=request.POST['country']  
+        party=party_details(buyer_name=name,mailing_address=mailing_address,Address=address,state=state,country=country)  
+        party.save()
+    return render(request,'creditnote.html')
 
 def displaymore(request,pk):
     com  = Companies.objects.get(id=pk)

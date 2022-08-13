@@ -212,3 +212,13 @@ class units(models.Model):
     formal_name=models.CharField(max_length=255)
     unitquantity_code=models.CharField(max_length=255)
     no_of_decimalplaces=models.IntegerField()
+
+class party_details(models.Model):
+    buyer_name=models.CharField(max_length=255)
+    mailing_address=models.CharField(max_length=255)
+    Address=models.CharField(max_length=255)
+    state=models.CharField(max_length=255)
+    country=models.CharField(max_length=255)
+
+
+

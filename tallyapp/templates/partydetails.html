@@ -64,7 +64,7 @@
    
     
 
-            <form  style="background-color:rgba(0,0,0,.4);"  action="{% url 'creditnote' %}">
+            <form  style="background-color:rgba(0,0,0,.4);"  method="post" action="{% url 'add_partydetails' %}">
                 {% csrf_token %}
                 <h6  class="bg-info text-light p-1 m-1 text-center">Party Details</h6>
                 <div class="row container-fluid justify-content-center" >
@@ -87,7 +87,7 @@
                         <div class="row container-fluid  p-2 m-0">
                             <div class="col-sm-4 m-0 p-0"> <label >Address</label></div>
                             <div class="col-sm-8 m-0 p-0"> 
-                            <input type="text" class="form-control" id="" placeholder="" name="alias"></div>
+                            <input type="text" class="form-control" id="" placeholder="" name="address"></div>
                         </div>
                         <div class="row container-fluid  p-2 m-0">
                             <div class="col-sm-4 m-0 p-0"> <label >State</label></div>
@@ -99,7 +99,7 @@
                         <div class="row container-fluid  p-2 m-0">
                             <div class="col-sm-4 m-0 p-0"> <label >Country</label></div>
                             <div class="col-sm-8 m-0 p-0"> 
-                            <input type="text" class="form-control" value="India" id="" placeholder="" name="alias" placeholder="india"></div>
+                            <input type="text" class="form-control" value="India" id="" placeholder="" name="country" placeholder="india"></div>
                         </div>
             
 

@@ -12,6 +12,8 @@
     </style>
 
 <script>
+
+
     function showVouchers(){
       
       document.getElementById('voucherPop').style.visibility= "visible";
@@ -119,20 +121,20 @@ function setnext()
        
     <h6 class="bg-info text-light p-1 m-1 text-left">Accounting Voucher Creation</h6>
     
-    <div  style="text-align: center;margin-top:-35px;font-weight:900">{{cmp.name}}</div>
-    <h4 style="text-align:right;margin-top:-35px;font-weight:900">date<input type="date" name="date"></h4>
-   
+    <div  style="text-align: center;margin-top:-25px;font-weight:900">{{com.name}}</div>
+    <div style="text-align: right;margin-top:-25px;margin-right:180px;font-weight:900" id="currentDate"></div>
 
             <form  style="background-color:rgba(0,0,0,.4);" method="post" action="{% url 'creditsave' %}">
                 {% csrf_token %}
                 
                
-                <div class="row container-fluid p-0 mt-4" >
+                <div class="row container-fluid p-0 mt-1" >
 
                    
                     <div class="col-sm-6 m-0 p-4">
-
+                       
                         <div class="row container-fluid  p-2 m-0">
+                        
                             <div class="col-sm-4 m-0 p-0"> <label >Credit note</label></div>
                             <div class="col-sm-8 m-0 p-0"> 
                             <input type="text" class="form-control" id="" value="1" name="credit" onclick="setvalue(value)"></div>
@@ -333,7 +335,10 @@ function setnext()
                     <div class="col-sm-6 m-1 p-1"></div>
                     <div class="col-sm-6 m-1 p-1" style=" background-color:rgba(0,0,0,0.2); height: 400px; padding-bottom: 10px;">
                         <!-- <a href="javascript:history.go(-1);" class="close">+</a> -->
+
+                        
                     <div  class="bg-info text-light">List of Ledger Accounts</div>
+                    <div style="text-align: right;" id="currentDate"></div>
                            <div>
                                <table>
                                 <br>
@@ -380,6 +385,11 @@ function setnext()
                     </div>
                 </div>
             </div>          
- 
-           
+ <script>
+    document.getElementById("currentDate").innerHTML=new Date().toDateString();
+
+function setDate(){
+    document.getElementById("currentDate").innerHTML= document.getElementById('enterDate').value;
+}
+ </script>
     {% endblock %}
