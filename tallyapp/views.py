@@ -1,4 +1,4 @@
-from calendar import month_name
+from calendar import month, month_name
 from datetime import datetime
 from re import A
 from xmlrpc.client import _datetime_type
@@ -503,6 +503,10 @@ def debitnoteregister(request,pk):
 
 def creditnoteregister(request,pk):
     cmp=Companies.objects.get(id=pk)
+    credit=creditenote.objects.all()
+    months = [i.month for i in creditenote.objects.values_list('date', flat=True)]
+    print(months)
+
     return render(request,'creditnoteregister.html',{'cmp':cmp})
 
 def date(request):
@@ -554,14 +558,12 @@ def accountbook(request,pk):
     
 def voucherregister(request):
     voucher=creditenote.objects.all()
-    vouher=creditenote.objects.filter(date='2022-4-1')
-
-    return render(request,'voucherregister.html',{'voucher':voucher})
+    months = [i.month for i in creditenote.objects.values_list('date', flat=True)]
+    print(months)
+    return render(request,'voucherregister.html',{'voucher':voucher,'months':months})
 
 def voucherregisterdebit(request):
     vouchers=debitnote.objects.all()
-    vouher=debitnote.objects.filter(date='2022-4-1')
-
     return render(request,'voucherregister.html',{'vouchers':vouchers})
 
 def creditsave(request):
@@ -570,10 +572,10 @@ def creditsave(request):
         item = request.POST['stock']
         vouchno=request.POST['credit']
         amount=request.POST['total']
-        date=str(datetime.month)
-        credit=creditenote(date=date,particulars=item,voucherno=vouchno,vouchertype="credit",credotamount=amount)
+        date=request.POST['']
+        credit=creditenote(date=date,particulars=item,voucherno=vouchno,vouchertype="credit",creditamount=amount)
         credit.save()
-    return render(request,'creditnote.html')
+    return render(request,'vouchers.html')
 
 
 
