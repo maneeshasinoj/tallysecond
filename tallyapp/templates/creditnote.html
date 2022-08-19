@@ -13,16 +13,20 @@
 
 <script>
 
-
+   
     function showVouchers(){
       
       document.getElementById('voucherPop').style.visibility= "visible";
-      document.getElementById('voucherPop').style.display = "block";  
+      document.getElementById('voucherPop').style.display = "block"; 
+      document.getElementById('ledger').hidden=true
      
   }
     function showVouchers(){
         document.getElementById('voucherPop').style.visibility= "visible";
-        document.getElementById('voucherPop').style.display = "block";  
+        document.getElementById('voucherPop').style.display = "block";
+        document.getElementById('ledger').hidden=true
+     
+        
     }
     window.addEventListener('click',outsideClick)
     function outsideClick(event){
@@ -83,6 +87,8 @@
     function showunder()
         {
             document.getElementById('tbody').hidden=false
+            document.getElementById('ledger').hidden=false
+            document.getElementById('party').hidden=true
         }
         function showstock()
         {
@@ -101,6 +107,12 @@
     {
         document.getElementById('stock').value=names;
   }
+  function setledger(names){
+        
+        document.getElementById('ledgeraccount').value=names;
+       
+        
+    }
   function addamount(){
     a=Number(document.getElementById('qty').value);
     b=Number(document.getElementById('rate').value);
@@ -150,7 +162,7 @@ function setnext()
                         <div class="row container-fluid  p-2 m-0">
                             <div class="col-sm-4 m-0 p-0"> <label >Ledger Account</label></div>
                             <div class="col-sm-8 m-0 p-0"> 
-                            <input type="text" class="form-control" id="" placeholder=""   name="ledger" onclick="showunder()"></div>
+                            <input type="text" class="form-control" id="ledgeraccount" placeholder=""   name="ledger" onclick="showunder()"></div>
                         </div>
 
 
@@ -331,7 +343,7 @@ function setnext()
                 
                 <!-- Listing -->
               
-                <div class="row container " style="margin-block-start: -390px;margin-left: 530px;justify-content: end;">
+                <div id="party" hidden class="row container " style="margin-block-start: -390px;margin-left: 530px;justify-content: end;">
                     <div class="col-sm-6 m-1 p-1"></div>
                     <div class="col-sm-6 m-1 p-1" style=" background-color:rgba(0,0,0,0.2); height: 400px; padding-bottom: 10px;">
                         <!-- <a href="javascript:history.go(-1);" class="close">+</a> -->
@@ -366,6 +378,43 @@ function setnext()
                         </div>
                     
            </div>    
+            <!-- Listing -->
+              
+            <div id="ledger" hidden class="row container " style="margin-block-start: -390px;margin-left: 530px;justify-content: end;">
+                <div class="col-sm-6 m-1 p-1"></div>
+                <div class="col-sm-6 m-1 p-1" style=" background-color:rgba(0,0,0,0.2); height: 400px; padding-bottom: 10px;">
+                    <!-- <a href="javascript:history.go(-1);" class="close">+</a> -->
+
+                    
+                <div  class="bg-info text-light">List of Ledger Account</div>
+                <div style="text-align: right;" id="currentDate"></div>
+                       <div>
+                           <table>
+                            <br>
+                            
+                            <tr>
+                                <div style="text-align: right;margin-right: 20px;"><a href="">Create</a></div>   
+                                
+                                </tr>
+                                <tr>
+                                    <div style="text-align: right;margin-right: 20px;"><a href="{% url 'alter' %}">Back</a></div>   
+                                    
+                                </tr>
+                                <hr style="width:100%;text-align:left;margin-left:0">
+                                {% for i in ledger %}
+                                    {% if i.under == "Sundry_Creditors" %}
+                                <tr>
+                                <div style="margin-left: 25px;"><a onclick="setledger('{{ i.name }}');">{{i.name}}</a></div>
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                                
+                                
+                           </table>
+                       </div>
+                    </div>
+                
+       </div>    
         
        
            <div class="row container">  
@@ -387,7 +436,7 @@ function setnext()
             </div>          
  <script>
     document.getElementById("currentDate").innerHTML=new Date().toDateString();
-
+    document.getElementById('party').hidden=false
 function setDate(){
     document.getElementById("currentDate").innerHTML= document.getElementById('enterDate').value;
 }

@@ -62,7 +62,10 @@
     </tbody>
     <tbody>
         {% for p in vouchers %}
+        {% for m in months %}
+          {% if m.months == "4" %}
             <tr>
+                <td>{{m.months }}</td>
                 <td>{{ p.date }}</td>
                 <td>{{ p.particulars }}</td>
                 <td>{{ p.vouchertype }}</td>
@@ -72,7 +75,9 @@
                 
                 
             </tr>
-        {% endfor%}
+            {% endif %}
+            {% endfor %}
+        {% endfor %}
     </tbody>
 </table>
     {% endblock %}

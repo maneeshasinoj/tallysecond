@@ -19,6 +19,7 @@
 
         document.getElementById('list').style.visibility= "hidden";
         document.getElementById('list').style.display = "none";   
+        document.getElementById('ledger').hidden=true
     }
     window.addEventListener('click',outsideClick)
     function outsideClick(event){
@@ -39,6 +40,16 @@
             document.getElementById('name').value=names
         }
         
+    }
+    function setledger(names){
+
+        if (document.getElementById('ledgeraccount').value==null)
+        {
+        document.getElementById('ledgeraccount').value=names
+        }
+        else{
+            document.getElementById('ledgeraccount').value=names
+        }  
     }
     function showDp(){
         document.getElementById('dpModal').style.visibility= "visible";
@@ -79,6 +90,10 @@
     function showunder()
         {
             document.getElementById('tbody').hidden=false
+            document.getElementById('list').style.visibility="hidden"
+            document.getElementById('list').style.display = "none";  
+            document.getElementById('ledger').hidden=false
+
         }
         function showstock()
         {
@@ -96,6 +111,7 @@
     function setstock(names)
     {
         document.getElementById('stock').value=names;
+    
        
   }
   function addamount(){
@@ -147,7 +163,7 @@ function shownext()
                         <div class="row container-fluid  p-2 m-0">
                             <div class="col-sm-4 m-0 p-0"> <label >Ledger Account</label></div>
                             <div class="col-sm-8 m-0 p-0"> 
-                            <input type="text" class="form-control" id="" placeholder=""   name="ledger" onclick="showunder()"></div>
+                            <input type="text" class="form-control" id="ledgeraccount" placeholder=""   name="ledger" onclick="showunder()"></div>
                         </div>
 
 
@@ -370,7 +386,43 @@ function shownext()
                         </div>
                     
            </div>    
-        
+         <!-- Listing Ledger-->
+              
+         <div id="ledger" hidden class="row container " style="margin-block-start: -390px;margin-left: 530px;justify-content: end;">
+            <div class="col-sm-6 m-1 p-1"></div>
+            <div class="col-sm-6 m-1 p-1" style=" background-color:rgba(0,0,0,0.2); height: 400px; padding-bottom: 10px;">
+                <!-- <a href="javascript:history.go(-1);" class="close">+</a> -->
+
+                
+            <div  class="bg-info text-light">List of Ledger Account</div>
+            <div style="text-align: right;" id="currentDate"></div>
+                   <div>
+                       <table>
+                        <br>
+                        
+                        <tr>
+                            <div style="text-align: right;margin-right: 20px;"><a href="">Create</a></div>   
+                            
+                            </tr>
+                            <tr>
+                                <div style="text-align: right;margin-right: 20px;"><a href="{% url 'alter' %}">Back</a></div>   
+                                
+                            </tr>
+                            <hr style="width:100%;text-align:left;margin-left:0">
+                            {% for i in ledger %}
+                                {% if i.under == "Sundry_Creditors" %}
+                            <tr>
+                            <div style="margin-left: 25px;"><a onclick="setledger('{{ i.name }}');">{{i.name}}</a></div>
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
+                            
+                            
+                       </table>
+                   </div>
+                </div>
+            
+   </div>    
        
            <div class="row container">  
             <div class="modal" id="voucherPop" style="width: 260px;height: 800px; margin-left: 890px;margin-top: 150px;">
