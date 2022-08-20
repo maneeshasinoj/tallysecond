@@ -13,14 +13,16 @@
 
 
 <script>
-    
+     function showVouchers(){
+      
+      document.getElementById('voucherPop').style.visibility= "visible";
+      document.getElementById('voucherPop').style.display = "block";  
+     
+  }
     function showVouchers(){
       
         document.getElementById('voucherPop').style.visibility= "visible";
         document.getElementById('voucherPop').style.display = "block";  
-
-        document.getElementById('table').style.visibility="hidden";
-    
        
     }
     window.addEventListener('click',outsideClick)

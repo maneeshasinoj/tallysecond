@@ -1,12 +1,17 @@
 from calendar import month, month_name
 from datetime import datetime
+import json
 from re import A
 from xmlrpc.client import _datetime_type
 from django.shortcuts import render,redirect
 from .models import *
 from django.contrib import messages
 from django.http import JsonResponse
+from django.core.serializers.json import DjangoJSONEncoder
 from tallyapp.models import receiptdetails,units
+from django.db.models.functions import ExtractMonth,ExtractYear
+
+
 def index(request):
     comp=Companies.objects.all()
     return render(request,'index.html',{'comp':comp})
@@ -474,7 +479,8 @@ def creditnote(request,pk):
     data['com']=com
     return render(request,'creditnote.html',data)
 
-def debitenote(request):
+def debitenote(request,pk):
+    com=Companies.objects.get(id=pk)
     ledger=Ledger.objects.all()
     stock=stockitem.objects.all()
     unit=units.objects.all()
@@ -482,6 +488,7 @@ def debitenote(request):
     data['ledger']=ledger
     data['stock']=stock
     data['unit']= unit
+    data['com']=com
     return render(request,'debitnote.html',data)
 
 
@@ -494,6 +501,7 @@ def partydetails(request):
     data={}
     data['ledger']=ledger
     data['states']=states
+    print(ledger)
     return render(request,'partydetails.html',data)
 
 def debitnoteregister(request,pk):
@@ -505,7 +513,7 @@ def creditnoteregister(request,pk):
     cmp=Companies.objects.get(id=pk)
     credit=creditenote.objects.all()
     months = [i.month for i in creditenote.objects.values_list('date', flat=True)]
-    print(months)
+    
 
     return render(request,'creditnoteregister.html',{'cmp':cmp})
 
@@ -532,10 +540,12 @@ def add_receiptdetails(request):
         data=receipt(tracking_no=trackingno,dispatch_Doc_No=dispatchno,dispatch_through=dsptchthrough,destination=destination,
                             carrier_name=carriername,bill_of_lading_no=billoflading,date=date,motorvehicle_no=motorvehicleno,
                             original_invoice_no=invoiceno,invoice_date=invoicedate)
-        data.save()       
+        data.save()   
+        return redirect('partydetails')    
     return render(request,'partydetails.html')  
 
 def add_partydetails(request):
+    com=Companies.objects.all()
     if request.method=='POST' :
         name=request.POST['name']  
         mailing_address=request.POST['mailingname']     
@@ -544,6 +554,7 @@ def add_partydetails(request):
         country=request.POST['country']  
         party=party_details(buyer_name=name,mailing_address=mailing_address,Address=address,state=state,country=country)  
         party.save()
+        return redirect('creditnote',pk=1)
     return render(request,'creditnote.html')
 
 def displaymore(request,pk):
@@ -555,27 +566,79 @@ def accountbook(request,pk):
     com  = Companies.objects.get(id=pk)
     context = {'com':com}
     return render(request,'accountbook.html',context)
-    
-def voucherregister(request):
-    voucher=creditenote.objects.all()
-    months = [i.month for i in creditenote.objects.values_list('date', flat=True)]
-    print(months)
-    return render(request,'voucherregister.html',{'voucher':voucher,'months':months})
 
-def voucherregisterdebit(request):
-    vouchers=debitnote.objects.all()
-    return render(request,'voucherregister.html',{'vouchers':vouchers})
+def add_partydetails_debit(request):
+    com=Companies.objects.all()
+    if request.method=='POST' :
+        name=request.POST['name']  
+        mailing_address=request.POST['mailingname']     
+        address=request.POST['address']    
+        state=request.POST['state']   
+        country=request.POST['country']  
+        party=party_details(buyer_name=name,mailing_address=mailing_address,Address=address,state=state,country=country)  
+        party.save()
+        return redirect('debitnote',pk=1)
+    return render(request,'creditnote.html')
+    
+def voucherregister(request,pk):
+#    import pdb;pdb.set_trace()
+    ###########################
+    
+#    months = [i.month for i in creditenote.objects.values_list('date', flat=True)]
+
+#    month=creditenote.objects.annotate(year=ExtractYear('date'),month=ExtractMonth('date')).values('year','month').filter(month=ExtractMonth('date'))
+#    print(month)
+    
+    print(pk)
+    voucher=creditenote.objects.filter(date__month=pk)
+    print(voucher)
+    total=sum(voucher.values_list('creditamount',flat=True))
+#    total=creditenote.objects.filter(date__month=pk).aggregate(TOTAL=sum('creditamount'))['TOTAL']
+    print(total)
+        
+
+    return render(request,'voucherregister.html',{'voucher':voucher,'total':total})
+   
+###################################
+def voucherregisterdebit(request,pk):
+
+    print(pk)
+    voucher=debitnote.objects.filter(date__month=pk)
+    print(voucher)
+    total=sum(voucher.values_list('debitamount',flat=True))
+#    total=creditenote.objects.filter(date__month=pk).aggregate(TOTAL=sum('creditamount'))['TOTAL']
+    print(total)
+        
+
+    return render(request,'voucherregisterdebit.html',{'voucher':voucher,'total':total})
 
 def creditsave(request):
     if request.method=='POST' :
     
-        item = request.POST['stock']
+        item = request.POST['stocks']
         vouchno=request.POST['credit']
+        v=vouchno
+        
+    
         amount=request.POST['total']
-        date=request.POST['']
+        date=datetime.today()
+        
         credit=creditenote(date=date,particulars=item,voucherno=vouchno,vouchertype="credit",creditamount=amount)
         credit.save()
-    return render(request,'vouchers.html')
+        return redirect('creditnote',pk=1)
+    return render(request,'index.html')
+
+def debitsave(request):
+    if request.method=='POST' :
+    
+        item = request.POST['stocks']
+        vouchno=request.POST['debit']
+        amount=request.POST['total']
+        date=datetime.today()
+        
+        debit=debitnote(date=date,particulars=item,voucherno=vouchno,vouchertype="debit",debitamount=amount)
+        debit.save()
+    return render(request,'index.html')
 
 
 

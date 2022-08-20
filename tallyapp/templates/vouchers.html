@@ -9,7 +9,7 @@
     <table>
    
     <tr>
-     <div style="margin-left: 20px;">{{com.name}}</div></tr>
+     <div style="margin-left: 20px;"></div></tr>
     
     </table>
 </div>
@@ -27,9 +27,7 @@
                     <div style="text-align: right;margin-right: 20px;"><a href="#">Create</a></div>  
                 </tr>
                 
-                <tr>
-                <div style="margin-left: 20px;color: black;">{{com.name}}</div></tr>
-                       
+               
                
             
                 <hr style="width:100%;text-align:left;margin-left:0">
@@ -43,7 +41,7 @@
                     <div style="margin-left: 25px;"><a href="{% url 'creditnote' com.id %}">Credit Note</a></div>   
                 </tr>
                 <tr>
-                    <div style="margin-left: 25px;"><a href="{% url 'debitenote' %}">Debit Note</a></div>   
+                    <div style="margin-left: 25px;"><a href="{% url 'debitenote' com.id %}">Debit Note</a></div>   
                 </tr>
                 <tr>
                     <div style="margin-left: 25px;"><a href="{% url 'listofcurrencies' %}">Journal</a></div>   

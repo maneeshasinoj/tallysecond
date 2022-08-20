@@ -19,8 +19,8 @@
 <div class="row container-fluid  p-2 m-0">
                                
                                   
-    <div class="col-sm-4 m-4" style="text-align:left">List of all Credit Note Vouchers
-        <div id="dateP1" style="font-weight: 900;margin-left:18px; text-align: end;">1-Apr-2022 to 30 Apr-2022</div>
+    <div class="col-sm-4 m-4" style="text-align:left">List of all debit Note Vouchers
+        <div id="dateP1" style="font-weight: 900;margin-left:18px; text-align: end;">1-Aug-2022 to 31-Aug-2022</div>
         
 
      </div>
@@ -48,7 +48,7 @@
     </thead>
     
     <tbody>
-        {% for p in vouchers %}
+        {% for p in voucher %}
             <tr>
                 <td>{{ p.date }}</td>
                 <td>{{ p.particulars }}</td>
@@ -61,6 +61,21 @@
             </tr>
         {% endfor%}
     </tbody>
+
+    <div class="row container-fluid m-0 w-100 p-0">
+        <table class="table p-0 m-0">
+            <tbody>
+                
+                <tr>
+                    <td class="w-75 m-0 p-0 pl-3">Grand Total</td>
+                    <td class="w-25 m-0 p-0 text-center"><input type="text" style="margin-left:-250px; text-align: center;" name="total" class="form-control" value="{{total}}" id="total" readonly  ></td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div> 
+     
 </table>
+
     {% endblock %}
 

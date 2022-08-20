@@ -103,9 +103,9 @@
   
         function setvalue(val)
     {
-         val= document.getElementById('credit');
-         v=1;
-            v=val.value + value;
+        v=val
+         v=v+1
+         
             document.getElementById('credit').value=v;
     }
     function setstock(names)
@@ -129,16 +129,16 @@ function shownext()
             n=n+1;
         }
 </script> 
-  <div class="m-0" style="width: 800px;margin-left: 100px;">
+  <div class="m-0" style="width: 800px;margin-left: 100px;margin-top: 100px;">
      <!---->
        
     <h6 class="bg-info text-light p-1 m-1 text-left">Accounting Voucher Creation</h6>
     
-    <div  style="text-align: center;margin-top:-35px;font-weight:900">{{cmp.name}}</div>
+    <div  style="text-align: center;margin-top:-50px;font-weight:900">{{com.name}}</div>
 
-   
+    <div style="text-align: right;margin-top:-15px;margin-right:180px;font-weight:900" id="currentDate"></div>
 
-            <form  style="background-color:rgba(0,0,0,.4);" method="post" action="#">
+            <form  style="background-color:rgba(0,0,0,.4);" method="post" action="{% url 'debitsave' %}" id="newform">
                 {% csrf_token %}
                 
                
@@ -150,7 +150,7 @@ function shownext()
                         <div class="row container-fluid  p-2 m-0">
                             <div class="col-sm-4 m-0 p-0"> <label >Debit note</label></div>
                             <div class="col-sm-8 m-0 p-0"> 
-                            <input type="text" class="form-control" id="" value="1" name="credit" onclick="setvalue(value)"></div>
+                            <input type="text" class="form-control" id="" value="1" name="debit" onclick="setvalue(value)"></div>
                         </div>
     
                        
@@ -211,7 +211,7 @@ function shownext()
                         <tbody hidden name="tbody" id="tbody">
                         <tr>
                             <td>
-                            <input type="text" id="stock" name="stock" class="form-control" placeholder="" onclick="showVouchers()" style="width: 200px;">
+                            <input type="text" id="stock" name="stocks" class="form-control" placeholder="" onclick="showVouchers()" style="width: 200px;">
                             </td>
                            <!--
                             <td class="w-100 m-0 p-0 pl-3" style="cursor: pointer;"><a type="button"> April</td></a>
@@ -336,7 +336,7 @@ function shownext()
                     <tbody>
                         <tr>
                             <td class="w-75 m-0 p-0 pl-3">Grand Total</td>
-                            <td class="w-25 m-0 p-0 text-center"><input type="text" class="form-control" placeholder="00" id="total" readonly></td>
+                            <td class="w-25 m-0 p-0 text-center"><input type="text" name="total" class="form-control" placeholder="00" id="total" readonly></td>
                         </tr>
                     </tbody>
                 </table>
@@ -441,6 +441,16 @@ function shownext()
                     </div>
                 </div>
             </div>          
- 
+            <script>
+                document.getElementById("currentDate").innerHTML=new Date().toDateString();
+                document.getElementById('party').hidden=false
+            function setDate(){
+                document.getElementById("currentDate").innerHTML= document.getElementById('enterDate').value;
+            }
+            function newFunction() {
+            document.getElementById("newform").reset();
+         }
+      
+             </script>
            
     {% endblock %}

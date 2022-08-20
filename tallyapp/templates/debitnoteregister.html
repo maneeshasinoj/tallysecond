@@ -71,16 +71,19 @@
              }
 </script>
 
+   
 <div class="month" >
-    <a href="{% url 'voucherregisterdebit' %}">April</a>
-    <a href="#">May</a>
-    <a href="#" >June</a>
-    <a href="#">July</a>
-    <a href="#">August</a>
-    <a href="#">September</a>
-    <a href="#">October</a>
-    <a href="#">November</a>
-    <a href="#">December</a>
+   
+    <a href="{% url 'voucherregisterdebit' '4' %}">April</a>
+    <a href="{% url 'voucherregisterdebit' '5' %}">May</a>
+    <a href="{% url 'voucherregisterdebit' '6' %}" >June</a>
+    <a href="{% url 'voucherregisterdebit' '7' %}">July</a>
+    <a href="{% url 'voucherregisterdebit' '8' %}">August</a>
+    <a href="{% url 'voucherregisterdebit' '9' %}">September</a>
+    <a href="{% url 'voucherregisterdebit' '10' %}">October</a>
+    <a href="{% url 'voucherregisterdebit' '11' %}">November</a>
+    <a href="{% url 'voucherregisterdebit' '12' %}">December</a>
+
 
 </div>
 {% endblock %}

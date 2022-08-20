@@ -24,9 +24,20 @@
 
 
 </style>
+<script>
+function setPeriod(){
+
+    console.log('hi')
+    document.getElementById("fdate").defaultValue= "2022-04-01"
+    document.getElementById('ldate').defaultValue= "2022-04-30"
+    var f = document.getElementById('fdate').value;
+    var l = document.getElementById('ldate').value;
+    
+    
+}
 
 
-
+</script>
 
 <div class="row container-fluid p-0 mx-0 justify-content-center">
     <div class="col-sm-10 p-0" style="background-color:rgba(0,0,0,0.2);height: 100%;">
@@ -72,17 +83,21 @@
              }
 </script>
 
+   
 <div class="month" >
-    <a href="{% url 'voucherregister'  %}">April</a>
-    <a href="#">May</a>
-    <a href="#" >June</a>
-    <a href="#">July</a>
-    <a href="#">August</a>
-    <a href="#">September</a>
-    <a href="#">October</a>
-    <a href="#">November</a>
-    <a href="#">December</a>
+   
+    <a href="{% url 'voucherregister' '4' %}">April</a>
+    <a href="{% url 'voucherregister' '5' %}">May</a>
+    <a href="{% url 'voucherregister' '6' %}" >June</a>
+    <a href="{% url 'voucherregister' '7' %}">July</a>
+    <a href="{% url 'voucherregister' '8' %}">August</a>
+    <a href="{% url 'voucherregister' '9' %}">September</a>
+    <a href="{% url 'voucherregister' '10' %}">October</a>
+    <a href="{% url 'voucherregister' '11' %}">November</a>
+    <a href="{% url 'voucherregister' '12' %}">December</a>
 
 </div>
+
+
 {% endblock %}
 
