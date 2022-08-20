@@ -83,20 +83,64 @@ function setPeriod(){
              }
 </script>
 
-   
-<div class="month" >
-   
-    <a href="{% url 'voucherregister' '4' %}">April</a>
-    <a href="{% url 'voucherregister' '5' %}">May</a>
-    <a href="{% url 'voucherregister' '6' %}" >June</a>
-    <a href="{% url 'voucherregister' '7' %}">July</a>
-    <a href="{% url 'voucherregister' '8' %}">August</a>
-    <a href="{% url 'voucherregister' '9' %}">September</a>
-    <a href="{% url 'voucherregister' '10' %}">October</a>
-    <a href="{% url 'voucherregister' '11' %}">November</a>
-    <a href="{% url 'voucherregister' '12' %}">December</a>
+<div class="row container-fluid m-0 w-100 p-0">
+    <table class="table p-0 m-0">
+        <tbody>
+            
+            <tr>
+                <td class="w-75 m-0 p-0 pl-3">April</td>
+                <td class="w-25 m-0 p-0 text-center"><a href="{% url 'voucherregister' '4' %}">  {{april}}</a></td>
+            </tr>
+            <tr>
+                <td class="w-75 m-0 p-0 pl-3">May</td>
+                <td class="w-25 m-0 p-0 text-center"><a href="{% url 'voucherregister' '5' %}">  {{may}}</a></td>
+            </tr>
+            <tr>
+                <td class="w-75 m-0 p-0 pl-3">June</td>
+                <td class="w-25 m-0 p-0 text-center"><a href="{% url 'voucherregister' '6' %}">  {{june}}</a></td>
+            </tr>
+            <tr>
+                <td class="w-75 m-0 p-0 pl-3">July</td>
+                <td class="w-25 m-0 p-0 text-center"><a href="{% url 'voucherregister' '7' %}">  {{july}}</a></td>
+            </tr>
+            <tr>
+                <td class="w-75 m-0 p-0 pl-3">August</td>
+                <td class="w-25 m-0 p-0 text-center"><a href="{% url 'voucherregister' '8' %}">  {{august}}</a></td>
+            </tr>
+            <tr>
+                <td class="w-75 m-0 p-0 pl-3">September</td>
+                <td class="w-25 m-0 p-0 text-center"><a href="{% url 'voucherregister' '9' %}">  {{september}}</a></td>
+            </tr>
+            <tr>
+                <td class="w-75 m-0 p-0 pl-3">October</td>
+                <td class="w-25 m-0 p-0 text-center"><a href="{% url 'voucherregister' '10' %}">  {{october}}</a></td>
+            </tr>
+            <tr>
+                <td class="w-75 m-0 p-0 pl-3">November</td>
+                <td class="w-25 m-0 p-0 text-center"><a href="{% url 'voucherregister' '11' %}">  {{november}}</a></td>
+            </tr>
+            <tr>
+                <td class="w-75 m-0 p-0 pl-3">December</td>
+                <td class="w-25 m-0 p-0 text-center"><a href="{% url 'voucherregister' '12' %}">  {{december}}</a></td>
+            </tr>
+            <tr>
+                <td class="w-75 m-0 p-0 pl-3">January</td>
+                <td class="w-25 m-0 p-0 text-center"><a href="{% url 'voucherregister' '1' %}">  {{january}}</a></td>
+            </tr>
+            <tr>
+                <td class="w-75 m-0 p-0 pl-3">February</td>
+                <td class="w-25 m-0 p-0 text-center"><a href="{% url 'voucherregister' '2' %}">  {{february}}</a></td>
+            </tr>
+            <tr>
+                <td class="w-75 m-0 p-0 pl-3">March</td>
+                <td class="w-25 m-0 p-0 text-center"><a href="{% url 'voucherregister' '3' %}">  {{march}}</a></td>
+            </tr>
 
-</div>
+            
+        </tbody>
+    </table>
+</div>  
+
 
 
 {% endblock %}

@@ -1,7 +1,9 @@
 from calendar import month, month_name
 from datetime import datetime
+from itertools import count
 import json
 from re import A
+from telnetlib import STATUS
 from xmlrpc.client import _datetime_type
 from django.shortcuts import render,redirect
 from .models import *
@@ -469,6 +471,7 @@ def vouchers(request,pk):
 
 def creditnote(request,pk):
     com=Companies.objects.get(id=pk)
+    
     ledger=Ledger.objects.all()
     stock=stockitem.objects.all()
     unit=units.objects.all()
@@ -507,15 +510,66 @@ def partydetails(request):
 def debitnoteregister(request,pk):
     cmp=Companies.objects.get(id=pk)
     print(cmp)
-    return render(request,'debitnoteregister.html',{'cmp':cmp})
+    april=debitnote.objects.filter(date__month='04').count()
+    may=debitnote.objects.filter(date__month='05').count() 
+    june=debitnote.objects.filter(date__month='06').count()
+    july=debitnote.objects.filter(date__month='07').count()
+    august=debitnote.objects.filter(date__month='08').count()
+    september=debitnote.objects.filter(date__month='09').count()
+    october=debitnote.objects.filter(date__month='10').count()
+    november=debitnote.objects.filter(date__month='11').count() 
+    december=debitnote.objects.filter(date__month='12').count()
+    january=debitnote.objects.filter(date__month='01').count()
+    february=debitnote.objects.filter(date__month='02').count()
+    march=debitnote.objects.filter(date__month='03').count()
+    data={}
+    data['april']=april
+    data['may']=may
+    data['june']=june
+    data['july']=july
+    data['august']=august
+    data['september']=september
+    data['october']=october
+    data['november']=november
+    data['december']=december
+    data['january']=january
+    data['february']=february
+    data['march']=march
+    data['cmp']=cmp
+    return render(request,'debitnoteregister.html',data)
 
 def creditnoteregister(request,pk):
-    cmp=Companies.objects.get(id=pk)
-    credit=creditenote.objects.all()
-    months = [i.month for i in creditenote.objects.values_list('date', flat=True)]
     
-
-    return render(request,'creditnoteregister.html',{'cmp':cmp})
+    cmp=Companies.objects.get(id=pk)
+    credit=creditreg.objects.all()
+    months = [i.month for i in creditreg.objects.values_list('date', flat=True)]
+    april=creditreg.objects.filter(date__month='04').count()
+    may=creditreg.objects.filter(date__month='05').count() 
+    june=creditreg.objects.filter(date__month='06').count()
+    july=creditreg.objects.filter(date__month='07').count()
+    august=creditreg.objects.filter(date__month='08').count()
+    september=creditreg.objects.filter(date__month='09').count()
+    october=creditreg.objects.filter(date__month='10').count()
+    november=creditreg.objects.filter(date__month='11').count() 
+    december=creditreg.objects.filter(date__month='12').count()
+    january=creditreg.objects.filter(date__month='01').count()
+    february=creditreg.objects.filter(date__month='02').count()
+    march=creditreg.objects.filter(date__month='03').count()
+    data={}
+    data['april']=april
+    data['may']=may
+    data['june']=june
+    data['july']=july
+    data['august']=august
+    data['september']=september
+    data['october']=october
+    data['november']=november
+    data['december']=december
+    data['january']=january
+    data['february']=february
+    data['march']=march
+    data['cmp']=cmp
+    return render(request,'creditnoteregister.html',data)
 
 def date(request):
     return render(request,'voucherregister.html')
@@ -590,13 +644,13 @@ def voucherregister(request,pk):
 #    print(month)
     
     print(pk)
-    voucher=creditenote.objects.filter(date__month=pk)
+    voucher=creditreg.objects.filter(date__month=pk)
     print(voucher)
     total=sum(voucher.values_list('creditamount',flat=True))
 #    total=creditenote.objects.filter(date__month=pk).aggregate(TOTAL=sum('creditamount'))['TOTAL']
-    print(total)
-        
-
+    cont=creditreg.objects.filter(date__month=pk).count()
+       
+    
     return render(request,'voucherregister.html',{'voucher':voucher,'total':total})
    
 ###################################
@@ -607,7 +661,7 @@ def voucherregisterdebit(request,pk):
     print(voucher)
     total=sum(voucher.values_list('debitamount',flat=True))
 #    total=creditenote.objects.filter(date__month=pk).aggregate(TOTAL=sum('creditamount'))['TOTAL']
-    print(total)
+
         
 
     return render(request,'voucherregisterdebit.html',{'voucher':voucher,'total':total})
@@ -617,13 +671,11 @@ def creditsave(request):
     
         item = request.POST['stocks']
         vouchno=request.POST['credit']
-        v=vouchno
-        
-    
+            
         amount=request.POST['total']
         date=datetime.today()
         
-        credit=creditenote(date=date,particulars=item,voucherno=vouchno,vouchertype="credit",creditamount=amount)
+        credit=creditreg(date=date,particulars=item,voucherno=vouchno,vouchertype="credit",creditamount=amount)
         credit.save()
         return redirect('creditnote',pk=1)
     return render(request,'index.html')

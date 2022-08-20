@@ -183,13 +183,16 @@ class receipt(models.Model):
     ledger = models.ForeignKey(Ledger, on_delete=models.CASCADE, blank=True,null=True)
     voucher=models.ForeignKey(Voucher,on_delete=models.CASCADE,blank=True,null=True)
 
-class creditenote(models.Model):
+
+
+class credit(models.Model):
     date=models.DateField()
     particulars=models.CharField(max_length=255)
     vouchertype=models.CharField(max_length=255)
     voucherno=models.IntegerField()
     debitamount=models.IntegerField(null=True)
     creditamount=models.IntegerField()
+
 
 
 class debitnote(models.Model):
@@ -199,6 +202,7 @@ class debitnote(models.Model):
     voucherno=models.IntegerField()
     debitamount=models.IntegerField()
     creditamount=models.IntegerField(null=True)
+
 
 class stockitem(models.Model):
     name=models.CharField(max_length=255)
@@ -220,5 +224,14 @@ class party_details(models.Model):
     state=models.CharField(max_length=255)
     country=models.CharField(max_length=255)
 
+class vouchertype(models.Model):
+    voucherno=models.CharField(max_length=255)
 
+class creditreg(models.Model):
+    date=models.DateField()
+    particulars=models.CharField(max_length=255)
+    vouchertype=models.CharField(max_length=255)
+    voucherno=models.IntegerField()
+    debitamount=models.IntegerField(null=True)
+    creditamount=models.IntegerField()
 
