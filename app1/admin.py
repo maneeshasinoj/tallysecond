@@ -48,3 +48,9 @@ class purchaseledgervoucheradmin(admin.ModelAdmin):
 @admin.register(salesledgervouchermodel)
 class salesledgervoucheradmin(admin.ModelAdmin):
     list_display = ('id','lstockitem','ludergroup','ldate','lname','lquantity','lbasicrate','lbasicvalue','laddlcost','ltotalvalue','lefsrate')
+
+admin.site.register(creditreg)
+admin.site.register(debitnote)
+admin.site.register(Sales)
+admin.site.register(Purchase)
+admin.site.register(Journal)

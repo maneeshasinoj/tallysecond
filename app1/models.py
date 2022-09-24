@@ -1058,3 +1058,19 @@ class salesledgervouchermodel(models.Model):
     laddlcost=models.IntegerField()
     ltotalvalue=models.IntegerField()
     lefsrate=models.IntegerField()
+
+class creditreg(models.Model):
+    date=models.DateField()
+    particulars=models.CharField(max_length=255)
+    vouchertype=models.CharField(max_length=255)
+    voucherno=models.IntegerField()
+    debitamount=models.IntegerField(null=True)
+    creditamount=models.IntegerField()
+
+class debitnote(models.Model):
+    date=models.DateField()
+    particulars=models.CharField(max_length=255)
+    vouchertype=models.CharField(max_length=255)
+    voucherno=models.IntegerField()
+    debitamount=models.IntegerField()
+    creditamount=models.IntegerField(null=True)

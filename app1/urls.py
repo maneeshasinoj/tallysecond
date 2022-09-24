@@ -300,6 +300,7 @@ urlpatterns = [
     path('purchaseregister',views.purchaseregister,name='purchaseregister'),#ann
     path('journalregister',views.journalregister,name='journalregister'),#ann
     path('listofsalesvoucher/<int:pk>',views.listofsalesvoucher,name='listofsalesvoucher'),#ann
+    
 
 #......................Niyas........................
 
@@ -424,4 +425,10 @@ urlpatterns = [
     path('creategroupviews',views.creategroupviews,name="creategroupviews"),
     path('groupanalisys/<int:pk>',views.groupanalisys,name="groupanalisys"),
     path('groupitem/<int:pk>',views.groupitem,name="groupitem"),
+
+    #maneesha
+    path('debitnoteregister',views.debitnoteregister,name='debitnoteregister'),
+    path('creditnoteregister',views.creditnoteregister,name='creditnoteregister'),
+    path('voucherregister/<int:pk>',views.voucherregister,name='voucherregister'),
+    path('voucherregisterdebit/<int:pk>',views.voucherregisterdebit,name='voucherregisterdebit'),
 ]

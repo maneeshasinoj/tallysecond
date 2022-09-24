@@ -4451,44 +4451,198 @@ def disp_more_reports(request):#ann
     return redirect('/')
 
 def salesregister(request):#ann
-    if 't_id' in request.session:
-        if request.session.has_key('t_id'):
-            t_id = request.session['t_id']
-        else:
-            return redirect('/')
-        tally = Companies.objects.filter(id=t_id)
-        credit=Sales.objects.filter(id=t_id).annotate(month=TruncMonth('sales_date')).values('month').annotate(total=Sum('total')).order_by('month').values("month", "total")                 # Select the count of the grouping       
-        sales=Sales.objects.filter(id=t_id)
-          
-        total1 = sum(sales.values_list('total', flat=True)) 
-        return render(request,'salesregister.html',{'sales':sales,'total1':total1,'credit':credit})
-    return redirect('/')
-
-def purchaseregister(request):#ann
-    if 't_id' in request.session:
-        if request.session.has_key('t_id'):
-            t_id = request.session['t_id']
-        else:
-            return redirect('/')
-        tally = Companies.objects.filter(id=t_id)
-        p=Purchase.objects.filter(id=t_id)
-        credit=Purchase.objects.filter(id=t_id).annotate(month=TruncMonth('purchase_date')).values('month').annotate(total=Sum('total')).order_by('month').values("month", "total")                 # Select the count of the grouping       
-        total1 = sum(p.values_list('total', flat=True))  
-        return render(request,'purchaseregister.html',{'total1':total1,'credit':credit})  
-    return redirect('/')
-
-def listofsalesvouchers(request):#ann
-    com=Companies.objects.all()
-    grp=Group.objects.all()
-    return render(request,'listofsalesvouchers.html')  
+    credit=Sales.objects.all().annotate(month=TruncMonth('sales_date')).values('month').annotate(total=Sum('total')).order_by('month').values("month", "total")      
+    sales=Sales.objects.all()                     
+    a=sales.filter(sales_date__month='04')
+    april= sum(a.values_list('total',flat=True))
+    ma=sales.filter(sales_date__month='05')
+    may= sum(ma.values_list('total',flat=True))
+    ju=sales.filter(sales_date__month='06')
+    june= sum(ju.values_list('total',flat=True))
+    jl=sales.filter(sales_date__month='07')
+    july= sum(jl.values_list('total',flat=True))
+    au=sales.filter(sales_date__month='08')
+    august= sum(au.values_list('total',flat=True))
+    sep=sales.filter(sales_date__month='09')
+    september= sum(sep.values_list('total',flat=True))
+    oct=sales.filter(sales_date__month='10')
+    october= sum(oct.values_list('total',flat=True))
+    nov=sales.filter(sales_date__month='11')
+    november= sum(nov.values_list('total',flat=True))
+    dec=sales.filter(sales_date__month='12')
+    december= sum(dec.values_list('total',flat=True))
+    jan=sales.filter(sales_date__month='01')
+    january= sum(jan.values_list('total',flat=True))
+    feb=sales.filter(sales_date__month='02')
+    febuary= sum(feb.values_list('total',flat=True))
+    m=sales.filter(sales_date__month='03')
+    march= sum(m.values_list('total',flat=True))
+    data={}
+    data['april']=april
+    data['june']=june
+    data['july']=july
+    data['august']=august
+    data['september']=september
+    data['october']=october
+    data['november']=november
+    data['december']=december
+    data['january']=january
+    data['febuary']=febuary
+    data['march']=march 
+    data['may']=may
+    total1=sum(sales.values_list('total',flat=True)) 
+    return render(request,'salesregister.html',{'total1':total1,'data':data}) 
+    
+  
  
-def journalregister(request):#ann
-    p=Particular.objects.all()
-    s=Journal.objects.all()
-    items=Journal.objects.all().annotate(month=TruncMonth('journal_date')).values('month').annotate(journal_count = Count('id')).values('month','journal_count').order_by('month')
-    print(items)
-    return render(request,'journal_report.html',{'items':items})
+def purchaseregister(request):#ann
+    P=Purchase.objects.all()
+    a=P.filter(purchase_date__month='04')
+    april= sum(a.values_list('total',flat=True))
+    ma=P.filter(purchase_date__month='05')
+    may= sum(ma.values_list('total',flat=True))
+    ju=P.filter(purchase_date__month='06')
+    june= sum(ju.values_list('total',flat=True))
+    jl=P.filter(purchase_date__month='07')
+    july= sum(jl.values_list('total',flat=True))
+    au=P.filter(purchase_date__month='08')
+    august= sum(au.values_list('total',flat=True))
+    sep=P.filter(purchase_date__month='09')
+    september= sum(sep.values_list('total',flat=True))
+    oct=P.filter(purchase_date__month='10')
+    october= sum(oct.values_list('total',flat=True))
+    nov=P.filter(purchase_date__month='11')
+    november= sum(nov.values_list('total',flat=True))
+    dec=P.filter(purchase_date__month='12')
+    december= sum(dec.values_list('total',flat=True))
+    jan=P.filter(purchase_date__month='01')
+    january= sum(jan.values_list('total',flat=True))
+    feb=P.filter(purchase_date__month='02')
+    febuary= sum(feb.values_list('total',flat=True))
+    m=P.filter(purchase_date__month='03')
+    march= sum(m.values_list('total',flat=True))
+    data={}
+    data['april']=april
+    data['june']=june
+    data['july']=july
+    data['august']=august
+    data['september']=september
+    data['october']=october
+    data['november']=november
+    data['december']=december
+    data['january']=january
+    data['febuary']=febuary
+    data['march']=march 
+    data['may']=may
+    
+    
+    total1 = sum(P.values_list('total', flat=True))  
+    return render(request,'purchaseregister.html',{'total1':total1,'data':data}) 
 
+def journalregister(request):#ann
+    P=Journal.objects.all()
+    april=P.filter(journal_date__month='04').count()
+    may=P.filter(journal_date__month='05').count()
+    june=P.filter(journal_date__month='06').count()
+    july=P.filter(journal_date__month='07').count()
+    august=P.filter(journal_date__month='08').count()
+    september=P.filter(journal_date__month='09').count()
+    october=P.filter(journal_date__month='10').count()
+    november=P.filter(journal_date__month='11').count()
+    december=P.filter(journal_date__month='12').count()
+    january=P.filter(journal_date__month='01').count()
+    febuary=P.filter(journal_date__month='02').count()
+    march=P.filter(journal_date__month='03').count()
+    data={}
+    data['april']=april
+    data['june']=june
+    data['july']=july
+    data['august']=august
+    data['september']=september
+    data['october']=october
+    data['november']=november
+    data['december']=december
+    data['january']=january
+    data['febuary']=febuary
+    data['march']=march 
+    data['may']=may
+    return render(request,'journal_report.html',{'data':data})
+
+    
+ 
+def listofledger(request,pk):#ann
+   # s=ledgers_vouchers.objects.all()
+    m=pk
+    l= ledgers_vouchers.objects.filter(ledgervoucher_date__year='2022', 
+                   ledgervoucher_date__month=m)
+    total1=0
+    total2=0
+    total1 = sum(l.values_list('credit', flat=True)) 
+    total2 = sum(l.values_list('debit', flat=True))               
+       
+    if m==1:
+            msg1="1-Jan-22  to 31-jan-22"
+    elif m==2:
+            msg1="1-Feb-22  to 28-feb-22"
+    elif m ==3:
+            msg1="1-March-22  to 31-March-22"
+    elif m ==4:
+        
+             msg1="1-April-22 to 30-April-22"
+    elif m ==5:
+             msg1="1-May-22  to 31-May-22"
+    elif m ==6:
+            msg1="1-June-22 to 31-May-22"
+    elif m ==7:
+            msg1="1-july-22  to 31-july-22"
+    elif m ==8:
+             msg1="1-Aug-22  to 31-Aug-22"  
+    elif m==9:
+        
+            msg1="1-Sep-22  to 30-Sep-22"
+    elif m ==10:
+             msg1="1-Oct-22 to 30-Oct-22"
+    elif m ==11:
+            msg1="1-Nov-22 to 31-Nov-22" 
+    elif m ==12:
+             msg1="1-Dec-22 to 31-Dec-22"     
+    else:
+        msg1="July 01 to 31" 
+    return render(request,'listofledger.html',{'ledgers':l,'msg1':msg1,'total1':total1,'total2':total2})     
+
+def listofpurchasevoucher(request,pk):#ann
+    m=pk
+    p= Purchase.objects.filter(purchase_date__year='2022', 
+                     purchase_date__month=m)   
+    total1 = sum(p.values_list('total', flat=True))                             
+    if m==1:
+            msg1="1-Jan-22  to 31-jan-22"
+    elif m==2:
+            msg1="1-Feb-22  to 28-feb-22"
+    elif m ==3:
+            msg1="1-March-22  to 31-March-22"
+    elif m ==4:
+             msg1="1-April-22 to 30-April-22"
+    elif m ==5:
+             msg1="1-May-22  to 31-May-22"
+    elif m ==6:
+            msg1="1-June-22 to 31-May-22"
+    elif m ==7:
+            msg1="1-july-22  to 31-july-22"
+    elif m ==8:
+             msg1="1-Aug-22  to 31-Aug-22"  
+    elif m==9:
+            msg1="1-Sep-22  to 30-Sep-22"
+    elif m ==10:
+             msg1="1-Oct-22 to 30-Oct-22"
+    elif m ==11:
+            msg1="1-Nov-22 to 31-Nov-22" 
+    elif m ==12:
+             msg1="1-Dec-22 to 31-Dec-22"      
+    else:
+        msg1="July 01 to 31"               
+    return render(request,'listofpurchasevouchers.html',{'purchase':p,'msg1':msg1,'total1':total1})
+    
 def listofsalesvoucher(request,pk):#ann
    # s=Sales.objects.all()
     m=pk
@@ -4524,8 +4678,7 @@ def listofsalesvoucher(request,pk):#ann
              msg1="1-Dec-22 to 31-Dec-22"     
     else:
         msg1="July 01 to 31" 
-    return render(request,'listofsalesvouchers.html',{'sales':s,'msg1':msg1,'total1':total1})  
-
+    return render(request,'listofsalesvouchers.html',{'sales':s,'msg1':msg1,'total1':total1})     
 
 def listofpurchasevoucher(request,pk):#ann
     m=pk
@@ -4559,7 +4712,7 @@ def listofpurchasevoucher(request,pk):#ann
     else:
         msg1="July 01 to 31"               
     return render(request,'listofpurchasevouchers.html',{'purchase':p,'msg1':msg1,'total1':total1})
-
+    
 def listjournalvouchers(request,pk):#ann 
     m=pk
     j= Journal.objects.filter(journal_date__year='2022', 
@@ -4593,6 +4746,10 @@ def listjournalvouchers(request,pk):#ann
         msg1="July 01 to 31"                        
     return render(request,'listjournalvouchers.html',{'journal':j,'msg1':msg1})
 
+def saleview(request,pk):#ann
+    sal=Sales.objects.get(id=pk)
+    print(sal)
+    return render(request,'saleview.html',{'sale':sal}) 
 
 #......................Niyas........................
 
@@ -5719,7 +5876,9 @@ def stock_items(request):
         cat=CreateStockCateg.objects.filter(id=t_id)
         # cat=CreateStockCateg.objects.all()
         grp=CreateStockGrp.objects.filter(id=t_id)
-        unt=UnitCrt.objects.filter(id=t_id)
+        # unt=UnitCrt.objects.filter(id=t_id)
+        unt_smpl=unit_simple.objects.all()
+        unt_cmp=unit_compound.objects.all()
         company=Companies.objects.get(id=t_id)
     if request.method=='POST':
         name=request.POST['name']
@@ -5740,7 +5899,7 @@ def stock_items(request):
                            manufacturing_date=manufacturing_date,expiry_dates=expiry_dates,
                            rate_of_duty=rate_of_duty,quantity=quantity,rate=rate,per=per,value=value,additional=additional,comp=company)
         crt.save()
-    return render(request,'stock_items.html',{'cat':cat,'grp':grp,'unt':unt})
+    return render(request,'stock_items.html',{'cat':cat,'grp':grp,'unt_smpl':unt_smpl,'unt_cmp':unt_cmp})
 
 def liststockviews(request):
     if 't_id' in request.session:
@@ -5807,7 +5966,25 @@ def itemmovementanalysisview(request):
             return redirect('/')
         # data1=purchase_model.objects.all()
         # data2=sale_model.objects.all()
-        context={'data1':data1,'data2':data2}
+        sum1=0
+        sum2=0
+        sum3=0
+        sum4=0
+        sum5=0
+        sum6=0
+        for a in data1:
+            sum1 += a.qnt
+        for a in data1:
+            sum2 += a.brate
+        for a in data1:
+            sum3 += a.totalvalue
+        for a in data2:
+            sum4 += a.qnt
+        for a in data2:
+            sum5 += a.brate
+        for a in data2:
+            sum6 += a.totalvalue
+        context={'data1':data1,'data2':data2,'sum1':sum1,'sum2':sum2,'sum3':sum3,'sum4':sum4,'sum5':sum5,'sum6':sum6}
         return render(request, 'itemmovementanalysis.html',context)
     return redirect("/")
 
@@ -6043,3 +6220,120 @@ def groupitem(request,pk):
                                             'sum1':sum1,'sum2':sum2,'sum3':sum3,'sum4':sum4,
                                             'sum5':sum5,'sum6':sum6,'sum7':sum7,'sum8':sum8,
                                             'sum9':sum9,'sum10':sum10,'sum11':sum11,'sum12':sum12})
+
+#Maneesha
+
+def creditnoteregister(request):
+    
+     if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        cmp=Companies.objects.get(id=t_id)
+        credit=creditreg.objects.all()
+        months = [i.month for i in creditreg.objects.values_list('date', flat=True)]
+        april=creditreg.objects.filter(date__month='04').count()
+        may=creditreg.objects.filter(date__month='05').count() 
+        june=creditreg.objects.filter(date__month='06').count()
+        july=creditreg.objects.filter(date__month='07').count()
+        august=creditreg.objects.filter(date__month='08').count()
+        september=creditreg.objects.filter(date__month='09').count()
+        october=creditreg.objects.filter(date__month='10').count()
+        november=creditreg.objects.filter(date__month='11').count() 
+        december=creditreg.objects.filter(date__month='12').count()
+        january=creditreg.objects.filter(date__month='01').count()
+        february=creditreg.objects.filter(date__month='02').count()
+        march=creditreg.objects.filter(date__month='03').count()
+        data={}
+        data['april']=april
+        data['may']=may
+        data['june']=june
+        data['july']=july
+        data['august']=august
+        data['september']=september
+        data['october']=october
+        data['november']=november
+        data['december']=december
+        data['january']=january
+        data['february']=february
+        data['march']=march
+        data['cmp']=cmp
+        return render(request,'creditnoteregister.html',data)
+
+def debitnoteregister(request):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        cmp=Companies.objects.get(id=t_id)
+        print(cmp)
+        april=debitnote.objects.filter(date__month='04').count()
+        may=debitnote.objects.filter(date__month='05').count() 
+        june=debitnote.objects.filter(date__month='06').count()
+        july=debitnote.objects.filter(date__month='07').count()
+        august=debitnote.objects.filter(date__month='08').count()
+        september=debitnote.objects.filter(date__month='09').count()
+        october=debitnote.objects.filter(date__month='10').count()
+        november=debitnote.objects.filter(date__month='11').count() 
+        december=debitnote.objects.filter(date__month='12').count()
+        january=debitnote.objects.filter(date__month='01').count()
+        february=debitnote.objects.filter(date__month='02').count()
+        march=debitnote.objects.filter(date__month='03').count()
+        data={}
+        data['april']=april
+        data['may']=may
+        data['june']=june
+        data['july']=july
+        data['august']=august
+        data['september']=september
+        data['october']=october
+        data['november']=november
+        data['december']=december
+        data['january']=january
+        data['february']=february
+        data['march']=march
+        data['cmp']=cmp
+        return render(request,'debitnoteregister.html',data)
+
+def voucherregister(request,pk):
+    #    import pdb;pdb.set_trace()
+    ###########################
+    
+#    months = [i.month for i in creditenote.objects.values_list('date', flat=True)]
+
+#    month=creditenote.objects.annotate(year=ExtractYear('date'),month=ExtractMonth('date')).values('year','month').filter(month=ExtractMonth('date'))
+#    print(month)
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        cmp=Companies.objects.get(id=t_id)
+    print(pk)
+    voucher=creditreg.objects.filter(date__month=pk)
+    print(voucher)
+    total=sum(voucher.values_list('creditamount',flat=True))
+#    total=creditenote.objects.filter(date__month=pk).aggregate(TOTAL=sum('creditamount'))['TOTAL']
+    cont=creditreg.objects.filter(date__month=pk).count()
+       
+    
+    return render(request,'voucherregister.html',{'voucher':voucher,'total':total,'cmp':cmp})
+
+def voucherregisterdebit(request,pk):
+     if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        cmp=Companies.objects.get(id=t_id)
+        print(pk)
+        voucher=debitnote.objects.filter(date__month=pk)
+        print(voucher)
+        total=sum(voucher.values_list('debitamount',flat=True))
+#    total=creditenote.objects.filter(date__month=pk).aggregate(TOTAL=sum('creditamount'))['TOTAL']
+
+        
+
+        return render(request,'voucherregisterdebit.html',{'voucher':voucher,'total':total,'cmp':cmp})

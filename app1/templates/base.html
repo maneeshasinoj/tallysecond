@@ -387,17 +387,29 @@
                         <a href="javascript:;" class="has-arrow">
                             <div class="parent-icon"><!-- <i class="bx bx-home-alt"></i> -->
                             </div>
-                            <div class="menu-title">STOCKS list</div>
+                            <!-- <div class="menu-title">STOCKS list</div> -->
+                            <div class="menu-title">Statement of inventury</div>
                         </a>
                         <ul>
                             <li>
-                                <a href="{% url 'liststockviews' %}"><i class="bx bx-right-arrow-alt"></i>List of stocks</a>
+                                <a href="{% url 'liststockviews' %}"><i class="bx bx-right-arrow-alt"></i>Stock Query</a>
                             </li>
                             <li>
-                                <a href="{% url 'liststockgroupviews' %}"><i class="bx bx-right-arrow-alt"></i>List of stock group</a>
-                            </li>
-                            <li>
-                                <a href="{% url 'catgroupsummary' %}"><i class="bx bx-right-arrow-alt"></i>List of stock Catogery</a>
+                                <a href="javascript:;"><i class="bx bx-right-arrow-alt"></i>Movement Analysis</a>
+                                <ul>
+                                    <li>
+                                        <a href="{% url 'liststockgroupviews' %}"><i class="bx bx-right-arrow-alt"></i>Stock group analysis</a>
+                                    </li>
+                                    <!-- <li>
+                                        <a href="{% url 'catgroupsummary' %}"><i class="bx bx-right-arrow-alt"></i>Stock Catogery analysis</a>
+                                    </li> -->
+                                    <li>
+                                        <a href="{% url 'grouppage' %}"><i class="bx bx-right-arrow-alt"></i>Group Analysis</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'selectledgerpage' %}"><i class="bx bx-right-arrow-alt"></i>Ledger Analysis</a>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </li>

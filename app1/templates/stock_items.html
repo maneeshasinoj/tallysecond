@@ -280,29 +280,33 @@
   <!-- List Creation Units -->
 
    <div class="form-units" id="list-units" >
-  
-    <h6 style="background-color:rgb(17, 169, 240) ;color:white">List of Units</h6>
-<hr >
-<div>
-    <table >
-    <tr >
-        <td>
-            <a href="unit_creation"><button
-                type="submit"
-                style="color: black;margin-left: 310%; width: 20%"
-                class="custom-select-md form-control"
-              >
-                create
-              </button></a> 
-        </td>
-    </tr>
+        <h6 style="background-color:rgb(17, 169, 240) ;color:white">List of Units</h6>
+        <hr >
+        <div>
+            <table>
+                <tr>
+                    <td class="text-right w-100">
+                        <a href="{% url 'load_unit_creation' %}" style="z-index: 1;color: black;">
+                            create
+                            <!-- <button type="submit"style="color: black;margin-left: 310%; width: 20%" class="custom-select-md form-control">
+                                create
+                            </button> -->
+                        </a> 
+                    </td>
+                    <td>
+                        
+                    </td>
+                </tr>
 
     <tr>
       <td>    
 
-        {% for l in unt %}
-      <div onclick="hideUnits('{{l.symbol}}')" style="color:black;" >{{l.symbol}}</div>
-      {% endfor %}
+        {% for l in unt_smpl %}
+            <div onclick="hideUnits('{{l.symbol}}')" style="color:black;" >{{l.symbol}}</div>
+        {% endfor %}
+        {% for l in unt_cmp %}
+            <div onclick="hideUnits('{{l.f_unit}}')" style="color:black;" > {{l.f_unit}} &nbsp; {{l.typ}}</div>
+        {% endfor %}
       </td>
     </tr>  
     
